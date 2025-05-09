@@ -13,7 +13,7 @@ export default function Hero() {
 
   return (
     <section id="hero" className="section bg-background text-foreground w-full py-16">
-      <div className="container text-center">
+      <div className="container mx-auto px-4 max-w-4xl">
         <motion.div
           className="mb-6"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -31,7 +31,7 @@ export default function Hero() {
           />
         </motion.div>
         <motion.h1
-          className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white"
+          className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -39,7 +39,7 @@ export default function Hero() {
           Abdur Rehman
         </motion.h1>
         <motion.p
-          className="mt-4 text-xl sm:text-2xl text-emerald-600 dark:text-emerald-400"
+          className="mt-4 text-xl sm:text-2xl text-emerald-600 dark:text-emerald-400 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -64,7 +64,7 @@ export default function Hero() {
           <span className="text-[22px] text-blue-500 dark:text-white">Founder, VisionGrid</span>
         </motion.div>
         <motion.p
-          className="mt-1 text-[18px] text-black dark:text-white max-w-2xl mx-auto"
+          className="mt-1 text-[18px] text-black dark:text-white max-w-2xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -72,7 +72,7 @@ export default function Hero() {
           "Your Vision, Our Code"
         </motion.p>
         <motion.p
-          className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+          className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
