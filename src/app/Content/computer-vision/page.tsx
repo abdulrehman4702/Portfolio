@@ -6,7 +6,7 @@ const content = {
   category: 'Computer Vision',
   date: 'February 20, 2025',
   readTime: '10 min read',
-  image: '/images/computer-vision.jpg',
+  image: '/images/vision.webp',
   content: `
     <h2>Introduction</h2>
     <p>Computer vision is critical for autonomous systems like self-driving cars. This research paper discusses optimizing convolutional neural networks (CNNs) for real-time object detection.</p>

@@ -6,7 +6,7 @@ const content = {
   category: 'Data Science',
   date: 'December 12, 2024',
   readTime: '9 min read',
-  image: '/images/ecommerce.jpg',
+  image: '/images/data-driven.jpeg',
   content: `
     <h2>Introduction</h2>
     <p>Predictive analytics drives e-commerce success. This case study examines how data insights boosted sales for an online retailer.</p>

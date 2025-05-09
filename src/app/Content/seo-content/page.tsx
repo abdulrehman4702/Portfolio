@@ -6,7 +6,7 @@ const content = {
   category: 'Content Creation',
   date: 'January 5, 2025',
   readTime: '7 min read',
-  image: '/images/seo-blog.jpg',
+  image: '/images/SEO.png',
   content: `
     <h2>Introduction</h2>
     <p>AI tools like Writesonic and ChatGPT are revolutionizing content creation. This guide shows how to craft SEO-optimized blogs that rank high on Google.</p>

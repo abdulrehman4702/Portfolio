@@ -6,7 +6,7 @@ const content = {
   category: 'Automation',
   date: 'March 15, 2025',
   readTime: '6 min read',
-  image: '/images/ai-automate.webp',
+  image: '/images/workflow.png',
   content: `
     <h2>Introduction</h2>
     <p>No-code platforms are transforming how businesses automate workflows. This article explores tools like Zapier and Airtable, highlighting their impact on efficiency.</p>
