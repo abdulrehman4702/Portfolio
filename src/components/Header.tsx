@@ -1,65 +1,101 @@
-import { Github, Linkedin, Mail, Phone } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { ProfileImage } from './ProfileImage';
+'use client';
 
-export function Header() {
-  const whatsappNumber = '923346828900';
-  
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { ThemeToggle } from './ThemeToggle';
+import ContentCreator from '../components/ContentCreator';
+
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/#about' },
+  { name: 'Skills', href: '/#skills' },
+  { name: 'Projects', href: '/#projects' },
+  { name: 'Experience', href: '/#experience' },
+  { name: 'Education', href: '/#education' },
+  { name: 'Services', href: '/services' },
+  { name: 'Testimonials', href: '/testimonials' },
+  { name: 'Research & Blogs', href: '/Content' },
+  { name: 'Contact', href: '/#contact' },
+];
+
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto' };
+  }, [isOpen]);
+
   return (
-    <header id="home" className="text-center pt-20 md:pt-24 pb-16 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-900 dark:to-purple-900 text-white">
-      <ProfileImage />
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-      >
-        <h1 className="text-4xl font-bold mb-2">Abdur Rehman</h1>
-        <p className="text-xl mb-6">Solution Engineer | Software Developer | API Integration Specialist</p>
-        <p className="mb-2">📍 Lahore, Pakistan</p>
-      </motion.div>
-
-      <motion.div
-        className="flex flex-wrap justify-center gap-4 mt-4 px-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-      >
-        <a 
-          href={`https://wa.me/${whatsappNumber}`}
-          target="_blank"
-          rel="noopener noreferrer" 
-          className="flex items-center hover:text-blue-200 transition-colors"
-        >
-          <Phone className="w-4 h-4 mr-2" />
-          +92-334-6828900
-        </a>
-        <a 
-          href="mailto:abdulrehman2001y@gmail.com" 
-          className="flex items-center hover:text-blue-200 transition-colors"
-        >
-          <Mail className="w-4 h-4 mr-2" />
-          Email
-        </a>
-        <a 
-          href="https://linkedin.com/in/abdul-rehman-165430230" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="flex items-center hover:text-blue-200 transition-colors"
-        >
-          <Linkedin className="w-4 h-4 mr-2" />
-          LinkedIn
-        </a>
-        <a 
-          href="https://github.com/abdulrehman4702" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="flex items-center hover:text-blue-200 transition-colors"
-        >
-          <Github className="w-4 h-4 mr-2" />
-          GitHub
-        </a>
-      </motion.div>
+    <header className={`sticky top-0 z-50 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg' : 'bg-white dark:bg-gray-900'}`}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
+          <motion.h1 
+            className="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Abdur Rehman
+          </motion.h1>
+          <div className="flex items-center space-x-4">
+            <nav className="hidden md:flex space-x-4 lg:space-x-6">
+              {navLinks.map(link => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm lg:text-base text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </nav>
+            <ThemeToggle />
+            <button
+              className="md:hidden text-gray-600 dark:text-gray-300 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            </button>
+          </div>
+        </div>
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.nav
+            className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {navLinks.map((link, index) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                className="block py-3 px-4 text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200"
+                onClick={() => setIsOpen(false)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

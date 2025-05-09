@@ -1,69 +1,106 @@
-import { Github, Linkedin, Mail, Phone } from 'lucide-react';
-import { motion } from 'framer-motion';
+'use client';
 
-export function Contact() {
-  const whatsappNumber = '923346828900';
-  const contacts = [
-    {
-      href: `https://wa.me/${whatsappNumber}`,
-      icon: <Phone className="w-6 h-6" />,
-      label: "WhatsApp",
-      text: "+92-334-6828900"
-    },
-    {
-      href: "mailto:abdulrehman2001y@gmail.com",
-      icon: <Mail className="w-6 h-6" />,
-      label: "Email",
-      text: "abdulrehman2001y@gmail.com"
-    },
-    {
-      href: "https://linkedin.com/in/abdul-rehman-165430230",
-      icon: <Linkedin className="w-6 h-6" />,
-      label: "LinkedIn",
-      text: "abdul-rehman-165430230"
-    },
-    {
-      href: "https://github.com/abdulrehman4702",
-      icon: <Github className="w-6 h-6" />,
-      label: "GitHub",
-      text: "abdulrehman4702"
-    }
-  ];
+import { motion } from 'framer-motion';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { useState } from 'react';
+
+export default function Contact() {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Note: Form submission is disabled due to sandbox restrictions.
+    // In a production environment, integrate with an API or email service.
+    alert('Form submission is disabled in this demo. Contact me directly via email or phone.');
+  };
 
   return (
-    <section id="contact" className="py-16 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4 max-w-4xl text-center">
-        <motion.div
+    <section id="contact" className="section bg-background text-foreground w-full py-16">
+      <div className="container">
+        <motion.h2
+          className="text-3xl font-bold text-center text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">Get in Touch</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-8">
-            Whether you're looking to collaborate on an innovative project or need expertise in API integration 
-            and computer vision, feel free to reach out!
-          </p>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {contacts.map(({ href, icon, label, text }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                whileHover={{ scale: 1.05 }}
+          Contact
+        </motion.h2>
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-semibold text-emerald-800 dark:text-emerald-400">Get in Touch</h3>
+            <ul className="mt-4 space-y-4 text-gray-600 dark:text-gray-300">
+              <li className="flex items-center space-x-2">
+                <FaPhone className="text-emerald-600 dark:text-emerald-400" />
+                <span> <a href="tel:+92-334-6828900" className="hover:text-emerald-600 dark:hover:text-emerald-400">+92-334-6828900</a></span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <FaEnvelope className="text-emerald-600 dark:text-emerald-400" />
+                <span> <a href="mailto:abdulrehman2001y@gmail.com" className="hover:text-emerald-600 dark:hover:text-emerald-400">abdulrehman2001y@gmail.com</a></span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <FaMapMarkerAlt className="text-emerald-600 dark:text-emerald-400" />
+                <span>Islamabad / Lahore</span>
+              </li>
+              <li className="flex items-center space-x-2">
+              <FaLinkedin className="text-emerald-600 dark:text-emerald-400" />
+                <span> <a href="https://www.linkedin.com/in/abdul-rehman-solution-engineer/" className="hover:text-emerald-600 dark:hover:text-emerald-400" target="_blank">LinkedIn</a></span>
+              </li>
+              <li className="flex items-center space-x-2">
+              <FaGithub className="text-emerald-600 dark:text-emerald-400" />
+                <span> <a href="https://github.com/abdulrehman4702" className="hover:text-emerald-600 dark:hover:text-emerald-400" target="_blank">GitHub</a></span>
+              </li>
+            </ul>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-semibold text-emerald-800 dark:text-emerald-400">Send a Message</h3>
+            <div className="mt-4 space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
+              />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 h-32 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
+              />
+              <button
+                onClick={handleSubmit}
+                className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-500 transition"
               >
-                <span className="p-3 rounded-full bg-blue-100 dark:bg-blue-900 mb-3">
-                  {icon}
-                </span>
-                <span className="font-semibold text-gray-800 dark:text-white mb-1">{label}</span>
-                <span className="text-sm text-gray-600 dark:text-gray-300">{text}</span>
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
+                Submit
+              </button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
