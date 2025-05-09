@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { ThemeToggle } from './ThemeToggle';
-import ContentCreator from '../components/ContentCreator';
 import { usePathname } from 'next/navigation';
 
 const navLinks = [
