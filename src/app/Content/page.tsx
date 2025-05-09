@@ -82,6 +82,7 @@ const contentItems: ContentItem[] = [
 
 export default function ContentCreator() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   return (
     <section
@@ -111,7 +112,7 @@ export default function ContentCreator() {
           <motion.div 
             className="flex gap-6"
             animate={{
-              x: [0, -1000],
+              x: isPaused ? "0" : [0, -1000],
             }}
             transition={{
               x: {
@@ -130,8 +131,14 @@ export default function ContentCreator() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                onMouseEnter={() => {
+                  setHoveredIndex(index);
+                  setIsPaused(true);
+                }}
+                onMouseLeave={() => {
+                  setHoveredIndex(null);
+                  setIsPaused(false);
+                }}
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent"
