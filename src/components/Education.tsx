@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export default function Education() {
   return (
     <section id="education" className="section bg-background text-foreground w-full py-16">
-      <div className="container">
+      <div className="container mx-auto px-4">
         <motion.h2
           className="text-3xl font-bold text-center text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 20 }}

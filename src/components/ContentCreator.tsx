@@ -80,104 +80,101 @@ const contentItems: ContentItem[] = [
   },
 ];
 
-export default function ContentCreator() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
+const ContentCreator = () => {
 
   return (
     <section
       id="content-creator"
-      className="section bg-background text-foreground w-full py-16 overflow-x-hidden"
+      className="section bg-background text-foreground w-full py-16"
     >
-      <div className="container">
+      <div className="container mx-auto px-4">
         <motion.h2
-          className="text-3xl sm:text-4xl font-bold text-center text-emerald-600"
+          className="text-3xl sm:text-4xl font-bold text-center text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
           Research & Blogs
         </motion.h2>
         <motion.p
-          className="mt-4 text-lg text-emerald-700/80 text-center max-w-2xl mx-auto"
+          className="mt-4 text-lg text-white text-center max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
         >
           Dive into my latest insights, research papers, and articles on AI, automation, web development, and content creation.
         </motion.p>
-        <div className="mt-12 relative">
+        <div className="mt-12">
           <motion.div 
-            className="flex gap-6"
-            animate={{
-              x: isPaused ? "0" : [0, -1000],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 20,
-                ease: "linear"
-              }
-            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {contentItems.map((item, index) => (
               <motion.div
                 key={item.slug}
-                className="bg-card text-card-foreground p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex-none w-80 border border-emerald-200 relative overflow-hidden"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                onMouseEnter={() => {
-                  setHoveredIndex(index);
-                  setIsPaused(true);
+                className="bg-card text-card-foreground p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-white relative overflow-hidden group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.2
                 }}
-                onMouseLeave={() => {
-                  setHoveredIndex(null);
-                  setIsPaused(false);
+                viewport={{ once: true }}
+                whileHover={{ 
+                  scale: 1.02,
+                  transition: { duration: 0.2 }
                 }}
               >
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent"
-                  animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
                 <div className="relative z-10">
-                  <Image
-                    src={item.image}
-                    alt={`${item.title} cover image`}
-                    width={288}
-                    height={160}
-                    className="w-full h-40 object-cover rounded-md mb-4"
-                  />
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="inline-block bg-emerald-500/10 text-emerald-600 text-xs font-semibold px-2 py-1 rounded">
-                      {item.category}
-                    </span>
-                    <FaBookOpen className="text-emerald-600" size={16} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-emerald-600 line-clamp-2">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-emerald-700/80 line-clamp-3">
-                    {item.excerpt}
-                  </p>
-                  <div className="mt-3 flex items-center text-xs text-emerald-700/80">
-                    <FaClock className="mr-1" size={12} />
-                    <span>{item.readTime}</span>
-                    <span className="mx-2">•</span>
-                    <span>{item.date}</span>
-                  </div>
-                  <Link
-                    href={`/Content/${item.slug}`}
-                    className="mt-4 inline-block bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 transition text-sm font-medium"
-                    aria-label={`Read more about ${item.title}`}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="overflow-hidden rounded-md"
                   >
-                    Read More
-                  </Link>
+                    <Image
+                      src={item.image}
+                      alt={`${item.title} cover image`}
+                      width={288}
+                      height={160}
+                      className="w-full h-40 object-cover mb-4 transform group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="inline-block bg-emerald-500/10 text-emerald-600 text-xs font-semibold px-2 py-1 rounded">
+                        {item.category}
+                      </span>
+                      <FaBookOpen className="text-emerald-600 group-hover:rotate-12 transition-transform duration-300" size={16} />
+                    </div>
+                    <h3 className="text-lg font-semibold text-emerald-600 line-clamp-2 group-hover:text-emerald-500 transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-emerald-700/80 line-clamp-3">
+                      {item.excerpt}
+                    </p>
+                    <div className="mt-3 flex items-center text-xs text-emerald-700/80">
+                      <FaClock className="mr-1" size={12} />
+                      <span>{item.readTime}</span>
+                      <span className="mx-2">•</span>
+                      <span>{item.date}</span>
+                    </div>
+                    <Link
+                      href={`/Content/${item.slug}`}
+                      className="mt-4 inline-block bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 transition-all duration-300 text-sm font-medium transform hover:scale-105 hover:shadow-lg"
+                      aria-label={`Read more about ${item.title}`}
+                    >
+                      Read More
+                    </Link>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
@@ -187,3 +184,5 @@ export default function ContentCreator() {
     </section>
   );
 }
+
+export default ContentCreator;
