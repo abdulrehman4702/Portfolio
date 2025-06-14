@@ -2,7 +2,9 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
+import { FaLink } from 'react-icons/fa';
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,6 +64,9 @@ export default function Hero() {
             priority
           />
           <span className="text-[22px] text-blue-500 dark:text-white">Founder, VisionGrid</span>
+          <Link href="https://vision-grid.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <FaLink className="w-6 h-6 object-contain rounded-full bg-transparent" />
+          </Link>
         </motion.div>
         <motion.p
           className="mt-1 text-[18px] text-black dark:text-white max-w-2xl mx-auto text-center"

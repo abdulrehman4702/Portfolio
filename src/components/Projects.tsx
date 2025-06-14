@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
-import { FaGithub } from 'react-icons/fa';
+import { FaLink } from 'react-icons/fa';
 
 const projects = [
   {
@@ -11,7 +11,7 @@ const projects = [
     description: 'An AI-driven platform that analyzes resumes, identifies skill gaps, and recommends matching job opportunities.',
     technologies: ['React.js (Frontend)', 'Flask (Backend with Machine Learning models)', 'MongoDB'],
     image: '/images/career-craft.jpg',
-    github: 'https://github.com/abdulrehman4702/careercraft',
+    github: 'https://github.com/abdulrehman4702/Job-recruitment',
    
   },
   {
@@ -19,7 +19,7 @@ const projects = [
     description: 'A smart agriculture solution automating soil analysis and crop recommendation using YOLOv8 and decision tree algorithms.',
     technologies: ['Next.js (Frontend)', 'Python and MongoDB (Backend)', 'Node.js (Authentication)'],
     image: '/images/agriculture.jpg',
-    github: 'https://github.com/abdulrehman4702/agri-vision',
+    github: 'https://github.com/abdulrehman4702/Final-Year-Project',
 
   },
   {
@@ -27,8 +27,36 @@ const projects = [
     description: 'A cutting-edge No-Code Automation Platform enabling users to build complex workflows visually. Features include YAML support, AI-based workflow suggestions, and real-time execution monitoring.',
     technologies: ['React.js (Frontend)', 'GoLang (Backend)', 'AI/ML engines'],
     image: '/images/easierflow.png',
-    github: 'https://github.com/abdulrehman4702/easierflow',
+    github: 'https://github.com/abdulrehman4702/easier-flow',
   },
+  {
+    title: 'Freeway X Uber (UK)',
+    description: 'A platform that allows users to book a ride from one location to another in the UK. It is the actual project that I worked on with my team.',
+    technologies: ['Fusion.js (Frontend)', '.NET (Backend)', 'MySQL'],
+    image: '/images/freewayxuber.jpg',
+    // github: 'https://github.com/abdulrehman4702/freewayxuber',
+  },
+  {
+    title: 'Dental Land Website',
+    description: 'A website for a dental clinic that allows users to book appointments and view the services offered.',
+    technologies: ['WordPress (Frontend)', 'Elementor (Page Builder)', 'PHP (Backend)'],
+    image: '/images/dental-land.png',
+    github: 'https://dentallands.com',
+  },
+  {
+    title: 'Shop Hub',
+    description: 'A website for a shop that allows users to buy and sell products online. It is the actual project that I worked on with my team.',
+    technologies: ['TypeScript (Frontend)', 'Node.js (Backend)', 'MongoDB'],
+    image: '/images/shop-hub.jpg',
+    github: 'https://github.com/abdulrehman4702/Shophub',
+  },
+  {
+    title: 'Alarm Clock',
+    description: 'A simple alarm clock that allows users to set alarms and get notifications. Practiced with Next.js and Node.js.',
+    technologies: ['Next.js (Frontend)', 'Node.js (Backend)', 'MongoDB'],
+    image: '/images/alarm-clock.webp',
+    github: 'https://github.com/abdulrehman4702/alarm-clock',
+  }
 ];
 
 export default function Projects() {
@@ -116,8 +144,8 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="flex items-center bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition"
                 >
-                  <FaGithub className="mr-2" />
-                  GitHub
+                  <FaLink className="mr-2" />
+                  Link
                 </a>
                 
                 <button

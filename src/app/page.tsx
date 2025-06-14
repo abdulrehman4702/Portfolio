@@ -23,8 +23,8 @@ export default function Home() {
         <Skills />
         <Projects />
         <Experience />
-        <Testimonials />
-        <ContentCreator />
+        {/* <Testimonials /> */}
+        {/* <ContentCreator /> */}
         <Education />
         <Contact />
       </motion.div>
