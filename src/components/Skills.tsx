@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FaPython, FaJs, FaReact, FaNodeJs } from 'react-icons/fa';
-import { SiCplusplus, SiNextdotjs, SiTailwindcss, SiFlask, SiGraphql, SiPostman, SiDjango } from 'react-icons/si';
+import { SiCplusplus, SiNextdotjs, SiTailwindcss, SiFlask, SiGraphql, SiPostman, SiDjango, SiApachenetbeanside } from 'react-icons/si';
 
 const skills = [
   {
@@ -32,7 +32,7 @@ const skills = [
   {
     category: 'API Development & Testing',
     items: [
-      { name: 'RESTful APIs', icon: null },
+      { name: 'RESTful APIs', icon: <SiApachenetbeanside className="text-black dark:text-white" /> },
       { name: 'GraphQL', icon: <SiGraphql className="text-[#E10098] dark:text-[#E10098]" /> },
       { name: 'Postman', icon: <SiPostman className="text-[#FF6C37] dark:text-[#FF6C37]" /> },
     ],
