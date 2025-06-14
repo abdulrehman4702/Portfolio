@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FaPython, FaJs, FaReact, FaNodeJs } from 'react-icons/fa';
-import { SiCplusplus, SiNextdotjs, SiTailwindcss, SiFlask, SiGraphql, SiPostman } from 'react-icons/si';
+import { SiCplusplus, SiNextdotjs, SiTailwindcss, SiFlask, SiGraphql, SiPostman, SiDjango } from 'react-icons/si';
 
 const skills = [
   {
@@ -25,6 +25,7 @@ const skills = [
     category: 'Back-End Development',
     items: [
       { name: 'Flask', icon: <SiFlask className="text-black dark:text-white" /> },
+      { name: 'Django', icon: <SiDjango className="text-black dark:text-white" /> },
       { name: 'Node.js', icon: <FaNodeJs className="text-[#339933] dark:text-[#339933]" /> },
     ],
   },
