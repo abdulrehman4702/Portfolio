@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'Abdur Rehman - Full Stack Developer',
   description: 'Personal portfolio of Abdur Rehman, a Full Stack Developer and Solution Engineer specializing in AI, automation, and modern web technologies.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
