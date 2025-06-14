@@ -14,8 +14,8 @@ const navLinks = [
   { name: 'Experience', href: '/#experience' },
   { name: 'Education', href: '/#education' },
   { name: 'Services', href: '/services' },
-  { name: 'Testimonials', href: '/testimonials' },
-  { name: 'Research & Blogs', href: '/#content-creator' },
+  // { name: 'Testimonials', href: '/testimonials' },
+  // { name: 'Research & Blogs', href: '/#content-creator' },
   { name: 'Contact', href: '/#contact' },
 ];
 
