@@ -30,10 +30,10 @@ export default function About() {
       transition={{ duration: 0.3 }}
     >
       <h3 className="text-2xl md:text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-4 flex items-center">
-        <span className="mr-2">🚀</span> Professional Journey
+         Professional Journey
       </h3>
       <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed">
-        I'm Abdur Rehman, a passionate Full Stack Developer and Solution Engineer with over 1.5 years of hands-on experience since 2023, crafting innovative and scalable software solutions that transform ideas into reality.
+        I'm Abdur Rehman, a passionate Full Stack Developer and Solution Engineer with over 1.5 years of hands-on experience, crafting innovative and scalable software solutions that transform ideas into reality.
       </p>
       <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed mt-4">
         I specialize in architecting and implementing robust back-end systems using Flask and Node.js, while delivering seamless front-end experiences with React.js and Next.js — ensuring performance, accessibility, and top-tier user satisfaction.
@@ -47,7 +47,7 @@ export default function About() {
       transition={{ duration: 0.3 }}
     >
       <h3 className="text-2xl md:text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-4 flex items-center">
-        <span className="mr-2">⚡</span> Technical Expertise
+        Technical Expertise
       </h3>
       <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed">
         My expertise spans AI/ML integration, Computer Vision, API testing, and automation platform development — empowering me to craft high-performance web apps built for scalability and intelligence.
@@ -64,7 +64,7 @@ export default function About() {
       transition={{ duration: 0.3 }}
     >
       <h3 className="text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-400 mb-4 flex items-center">
-        <span className="mr-2">💡</span> Research Highlight
+         Research Highlight
       </h3>
       <p className="text-emerald-900 dark:text-emerald-300 text-base md:text-lg leading-relaxed">
         Currently building <strong className="text-emerald-700 dark:text-emerald-400">"Easier Flow"</strong> — a no-code automation platform inspired by Zapier and n8n — designed to empower users with AI-driven workflow automation and beautiful, intuitive UX.
