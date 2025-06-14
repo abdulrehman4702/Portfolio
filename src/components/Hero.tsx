@@ -57,9 +57,9 @@ export default function Hero() {
           <Image
             src="/images/logo.png"
             alt="VisionGrid Logo"
-            width={40}
-            height={40}
-            className="w-14 h-14 object-contain rounded-full bg-transparent"
+            width={70}
+            height={70}
+            className="w-16 h-16 object-contain cursor-pointer rounded-full bg-transparent"
             quality={100}
             priority
           />
