@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { FaLink } from 'react-icons/fa';
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { FaLink } from "react-icons/fa";
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +14,10 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="section bg-background text-foreground w-full py-16">
+    <section
+      id="hero"
+      className="section bg-background text-foreground w-full py-16"
+    >
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div
           className="mb-6"
@@ -46,7 +49,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          Software Engineer 
+          Software Engineer
         </motion.p>
         <motion.div
           className="mt-2 flex items-center justify-center gap-2"
@@ -63,8 +66,14 @@ export default function Hero() {
             quality={100}
             priority
           />
-          <span className="text-[22px] text-blue-500 dark:text-white">Founder, VisionGrid</span>
-          <Link href="https://vision-grid.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <span className="text-[22px] text-blue-500 dark:text-white">
+            Founder, VisionGrid
+          </span>
+          <Link
+            href="https://vision-grid.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaLink className="w-6 h-6 object-contain rounded-full bg-transparent" />
           </Link>
         </motion.div>
@@ -82,7 +91,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          Building Scalable Solutions with AI, Automation, and Modern Web Technologies.
+          Building Scalable Solutions with AI, Automation, and Modern Web
+          Technologies.
         </motion.p>
         <motion.div
           className="mt-6 flex justify-center gap-4"
@@ -90,20 +100,15 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <a
-            href="https://drive.google.com/uc?export=download&id=1OMY0pd1TvHg-iPz3i8gBYimSlInjjN6L"
-            download="Abdur_Rehman_Resume.pdf"
-            rel="noopener noreferrer"
-            className="inline-block bg-emerald-600 text-white py-2 px-6 rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-500 transition"
-          >
-            Download Resume
-          </a>
-          <a
-            href="#contact"
-            className="inline-block border border-emerald-900 dark:border-emerald-400 text-emerald-900 dark:text-emerald-400 py-2 px-6 rounded-lg hover:bg-emerald-50 dark:hover:bg-gray-700 transition"
-          >
-            Contact Me
-          </a>
+          <button className="inline-block cursor-pointer bg-emerald-600 text-white py-2 px-6 rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-500 transition">
+            <a
+              href="https://drive.google.com/uc?export=download&id=1OMY0pd1TvHg-iPz3i8gBYimSlInjjN6L"
+              download="Abdur_Rehman_Resume.pdf"
+              rel="noopener noreferrer"
+            >
+              Download Resume
+            </a>
+          </button>
         </motion.div>
       </div>
 
