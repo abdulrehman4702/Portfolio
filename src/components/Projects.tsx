@@ -31,7 +31,7 @@ const projects = [
   },
   {
     title: 'Freeway X Uber (UK)',
-    description: 'A platform that allows users to book a ride from one location to another in the UK. It is the actual project that I worked on with my team.',
+    description: 'A client project I developed independently, creating an insurance policy platform specifically designed for Uber drivers in the UK.',
     technologies: ['Fusion.js (Frontend)', '.NET (Backend)', 'MySQL'],
     image: '/images/freewayxuber.jpg',
     // github: 'https://github.com/abdulrehman4702/freewayxuber',
@@ -56,6 +56,13 @@ const projects = [
     technologies: ['Next.js (Frontend)', 'Node.js (Backend)', 'MongoDB'],
     image: '/images/alarm-clock.webp',
     github: 'https://github.com/abdulrehman4702/alarm-clock',
+  },
+  {
+    title: 'Insolvency Dashboard',
+    description: 'A real time dashboard for insolvency cases in the UK. It will fetch data from the API and display it in a dashboard and also provide a way to filter the data.',
+    technologies: ['React.js (Frontend)', 'Python (Backend)', 'MySQL'],
+    image: '/images/insolvency-dashboard.png',
+    github: 'https://insolvency-dashboard.vercel.app/',
   }
 ];
 
