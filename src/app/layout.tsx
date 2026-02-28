@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Header from '../components/Header';
@@ -21,7 +21,6 @@ export const metadata: Metadata = {
   creator: 'Abdur Rehman',
   applicationName: siteName,
   manifest: '/manifest.json',
-  themeColor: [{ media: '(prefers-color-scheme: light)', color: '#059669' }, { media: '(prefers-color-scheme: dark)', color: '#10b981' }],
   referrer: 'origin-when-cross-origin',
   openGraph: {
     type: 'website',
@@ -61,6 +60,13 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
   },
   category: 'technology',
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#059669' },
+    { media: '(prefers-color-scheme: dark)', color: '#10b981' },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -77,8 +77,3 @@ export default function ComputerVisionPage() {
     </article>
   );
 }
-
-export const metadata = {
-  title: `${content.title} - Abdur Rehman`,
-  description: content.content.split('<p>')[1].split('</p>')[0],
-};
