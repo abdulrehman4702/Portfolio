@@ -123,7 +123,7 @@ export default function Testimonials() {
                   ))}
                 </div>
                 <p className="mt-3 text-foreground text-center italic text-sm leading-relaxed">
-                  "{testimonial.quote}"
+                  &ldquo;{testimonial.quote}&rdquo;
                 </p>
               </motion.div>
             ))}
