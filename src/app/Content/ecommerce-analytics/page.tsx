@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { FaClock, FaBookOpen } from 'react-icons/fa';
+import { siteUrl } from '@/lib/seo';
 
 const content = {
   title: 'Data-Driven Insights for E-Commerce Growth',
@@ -23,6 +25,20 @@ const content = {
     <h2>Conclusion</h2>
     <p>Data-driven strategies are essential for e-commerce growth in a competitive market.</p>
   `,
+};
+
+export const metadata: Metadata = {
+  title: content.title,
+  description:
+    'E-commerce analytics: predictive analytics, Python, Pandas, Scikit-learn, customer behavior. By Abdur Rehman.',
+  openGraph: {
+    title: `${content.title} | Abdur Rehman`,
+    description: 'Data-driven e-commerce growth and analytics.',
+    url: `${siteUrl}/Content/ecommerce-analytics`,
+    type: 'article',
+    publishedTime: '2024-12-12',
+  },
+  alternates: { canonical: `${siteUrl}/Content/ecommerce-analytics` },
 };
 
 export default function EcommerceAnalyticsPage() {

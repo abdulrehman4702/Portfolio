@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { FaClock, FaBookOpen } from 'react-icons/fa';
+import { siteUrl } from '@/lib/seo';
 
 const content = {
   title: 'Ethical Considerations in AI Development',
@@ -27,6 +29,20 @@ const content = {
     <h2>Conclusion</h2>
     <p>Ethical AI development requires a balance of innovation and responsibility.</p>
   `,
+};
+
+export const metadata: Metadata = {
+  title: content.title,
+  description:
+    'Ethical AI development: bias, transparency, privacy. Fairness, explainable AI, federated learning. By Abdur Rehman.',
+  openGraph: {
+    title: `${content.title} | Abdur Rehman`,
+    description: 'Ethical considerations in AI: bias, transparency, and privacy.',
+    url: `${siteUrl}/Content/ai-ethics`,
+    type: 'article',
+    publishedTime: '2024-11-01',
+  },
+  alternates: { canonical: `${siteUrl}/Content/ai-ethics` },
 };
 
 export default function AIEthicsPage() {

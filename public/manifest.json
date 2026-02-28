@@ -1,0 +1,12 @@
+{
+  "name": "Abdur Rehman - Full Stack Developer (MERN)",
+  "short_name": "Abdur Rehman",
+  "description": "Portfolio of Abdur Rehman. Full Stack Developer (MERN), React, Next.js, Node.js, AI/ML, GCP. Projects: Mansha Transport, Airec, Talent Sync IQ, Unsh.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#059669",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "technology", "developer"],
+  "lang": "en"
+}

@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { FaClock, FaBookOpen } from 'react-icons/fa';
+import { siteUrl } from '@/lib/seo';
 
 const content = {
   title: 'Crafting SEO-Optimized Blogs with AI Tools',
@@ -27,6 +29,20 @@ const content = {
     <h2>Conclusion</h2>
     <p>AI-powered content creation is a game-changer for bloggers aiming to dominate search rankings.</p>
   `,
+};
+
+export const metadata: Metadata = {
+  title: content.title,
+  description:
+    'SEO-optimized blogs with AI: Writesonic, ChatGPT, keyword research, meta descriptions. By Abdur Rehman.',
+  openGraph: {
+    title: `${content.title} | Abdur Rehman`,
+    description: 'SEO and AI-powered content creation.',
+    url: `${siteUrl}/Content/seo-content`,
+    type: 'article',
+    publishedTime: '2025-01-05',
+  },
+  alternates: { canonical: `${siteUrl}/Content/seo-content` },
 };
 
 export default function SEOContentPage() {

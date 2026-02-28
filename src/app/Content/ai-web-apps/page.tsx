@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { FaClock, FaBookOpen } from 'react-icons/fa';
+import { siteUrl } from '@/lib/seo';
 
 const content = {
   title: 'Building Scalable AI-Powered Web Applications',
@@ -27,6 +29,20 @@ const content = {
     <h2>Conclusion</h2>
     <p>Building AI-powered web apps combines the power of modern frameworks with cutting-edge machine learning. By following best practices, developers can create robust, scalable solutions.</p>
   `,
+};
+
+export const metadata: Metadata = {
+  title: content.title,
+  description:
+    'Build scalable AI-powered web apps with Flask, Node.js, TensorFlow. Real-time predictions, chatbots, recommendations. By Abdur Rehman.',
+  openGraph: {
+    title: `${content.title} | Abdur Rehman`,
+    description: 'AI-powered web applications with Flask, Node.js, TensorFlow.',
+    url: `${siteUrl}/Content/ai-web-apps`,
+    type: 'article',
+    publishedTime: '2025-04-10',
+  },
+  alternates: { canonical: `${siteUrl}/Content/ai-web-apps` },
 };
 
 export default function AIWebAppsPage() {

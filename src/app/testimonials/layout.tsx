@@ -1,9 +1,15 @@
 import type { Metadata } from 'next';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Testimonials - Abdur Rehman',
+  title: 'Testimonials',
   description:
-    'Read testimonials from clients and colleagues about Abdur Rehman’s work in full-stack development, AI/ML integration, automation platforms, and computer vision solutions.',
+    'Client and colleague testimonials about Abdur Rehman: full-stack development, AI/ML integration, automation platforms, and computer vision.',
+  openGraph: {
+    title: 'Testimonials | Abdur Rehman - Full Stack Developer',
+    url: `${siteUrl}/testimonials`,
+  },
+  alternates: { canonical: `${siteUrl}/testimonials` },
 };
 
 export default function TestimonialsLayout({ children }: { children: React.ReactNode }) {

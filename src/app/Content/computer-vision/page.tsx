@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { FaClock, FaBookOpen } from 'react-icons/fa';
+import { siteUrl } from '@/lib/seo';
 
 const content = {
   title: 'Advances in Computer Vision for Autonomous Systems',
@@ -23,6 +25,20 @@ const content = {
     <h2>Conclusion</h2>
     <p>Advancements in computer vision are paving the way for safer, more reliable autonomous systems.</p>
   `,
+};
+
+export const metadata: Metadata = {
+  title: content.title,
+  description:
+    'Research on computer vision for autonomous systems: CNNs, YOLOv5, EfficientDet, real-time object detection. By Abdur Rehman.',
+  openGraph: {
+    title: `${content.title} | Abdur Rehman`,
+    description: 'Computer vision, real-time object detection, and autonomous systems.',
+    url: `${siteUrl}/Content/computer-vision`,
+    type: 'article',
+    publishedTime: '2025-02-20',
+  },
+  alternates: { canonical: `${siteUrl}/Content/computer-vision` },
 };
 
 export default function ComputerVisionPage() {

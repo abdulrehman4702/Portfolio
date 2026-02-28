@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { FaClock, FaBookOpen } from 'react-icons/fa';
+import { siteUrl } from '@/lib/seo';
 
 const content = {
   title: 'The Future of No-Code Automation Platforms',
@@ -27,6 +29,20 @@ const content = {
     <h2>Conclusion</h2>
     <p>No-code platforms are the future of automation, democratizing technology and accelerating innovation.</p>
   `,
+};
+
+export const metadata: Metadata = {
+  title: content.title,
+  description:
+    'No-code automation: Zapier, Airtable, Make. Workflow automation for businesses. By Abdur Rehman.',
+  openGraph: {
+    title: `${content.title} | Abdur Rehman`,
+    description: 'No-code platforms and workflow automation.',
+    url: `${siteUrl}/Content/no-code-automation`,
+    type: 'article',
+    publishedTime: '2025-03-15',
+  },
+  alternates: { canonical: `${siteUrl}/Content/no-code-automation` },
 };
 
 export default function NoCodeAutomationPage() {
