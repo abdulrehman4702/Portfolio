@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   keywords: defaultKeywords,
   authors: [{ name: 'Abdur Rehman', url: siteUrl }],
   creator: 'Abdur Rehman',
+  publisher: 'Abdur Rehman',
   applicationName: siteName,
   manifest: '/manifest.json',
   referrer: 'origin-when-cross-origin',
@@ -26,23 +27,26 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: 'Abdur Rehman',
-    title: siteTitle,
-    description: siteDescription,
+    siteName: 'Abdur Rehman Portfolio',
+    title: 'Abdur Rehman — Full-Stack Developer & AI Solutions Engineer',
+    description:
+      'Explore projects, SaaS architectures, and full-stack solutions built with React, Next.js 14, Node.js, MongoDB, and GCP Cloud Architecture by Abdur Rehman.',
     images: [
       {
-        url: '/images/profile.jpg',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Abdur Rehman - Full Stack Developer (MERN)',
+        alt: 'Abdur Rehman — Full-Stack Developer & AI Solutions Engineer',
+        type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteTitle,
-    description: siteDescription,
-    images: ['/images/profile.jpg'],
+    title: 'Abdur Rehman — Full-Stack Developer & AI Solutions Engineer',
+    description:
+      'Explore projects, SaaS architectures, and full-stack solutions built with React, Next.js 14, Node.js, MongoDB, and GCP Cloud Architecture by Abdur Rehman.',
+    images: ['/opengraph-image'],
     creator: '@abdur_rehman',
   },
   robots: {
@@ -51,6 +55,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   alternates: {
@@ -58,14 +65,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
   category: 'technology',
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#059669' },
-    { media: '(prefers-color-scheme: dark)', color: '#10b981' },
+    { media: '(prefers-color-scheme: light)', color: '#0f172a' },
+    { media: '(prefers-color-scheme: dark)', color: '#090d16' },
   ],
 };
 
