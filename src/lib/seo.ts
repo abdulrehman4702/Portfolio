@@ -3,52 +3,44 @@
  * Set NEXT_PUBLIC_SITE_URL in production (e.g. https://yourdomain.com).
  */
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://abdur-rehman-portfolio.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-abdur-rehman.vercel.app';
 
 export const siteName = 'Abdur Rehman';
-export const siteTitle = 'Abdur Rehman - Full Stack Developer (MERN)';
+export const siteTitle = 'Abdur Rehman - Full Stack Developer & AI Solutions Engineer';
 export const siteDescription =
-  'Full Stack Developer (MERN) and Solution Engineer. React, Next.js, Node.js, MongoDB, TypeScript. AI/ML integration, GCP deployment. Projects: Mansha Transport, Airec, Talent Sync IQ, Unsh. Islamabad, Pakistan.';
+  'Full Stack Developer (MERN) and AI Solutions Engineer. React, Next.js, Node.js, MongoDB, TypeScript, AI Agents & LLMs, GCP. Flagship projects: TalentSync IQ (All-in-one AI platform), Airec, Mansha Transport, Unsh.';
 
 export const defaultKeywords = [
   'Abdur Rehman',
   'Full Stack Developer',
+  'AI Solutions Engineer',
   'MERN Stack',
   'React developer',
   'Node.js developer',
   'Next.js developer',
   'MongoDB',
   'TypeScript',
-  'Pakistan developer',
-  'Islamabad developer',
-  'Lahore developer',
-  'AI integration',
-  'GCP deployment',
-  'Mansha Transport',
+  'TalentSync IQ',
   'Airec',
-  'Talent Sync IQ',
+  'Mansha Transport',
   'Unsh',
   'VisionGrid',
+  'AI integration',
+  'GCP deployment',
   'web development',
   'software engineer',
-  'hire full stack developer',
-  'MERN developer portfolio',
-  'React Node.js developer',
-  'frontend backend developer',
-  'E-commerce developer',
-  'recruitment platform developer',
 ];
 
 export const person = {
   name: 'Abdur Rehman',
-  jobTitle: 'Full Stack Developer (MERN)',
+  jobTitle: 'Full Stack Developer & AI Solutions Engineer',
   email: 'abdulrehman2001y@gmail.com',
   location: { addressLocality: 'Islamabad', addressRegion: 'Islamabad', addressCountry: 'PK' },
   url: siteUrl,
   image: `${siteUrl}/images/profile.jpg`,
   sameAs: [
-    'https://www.linkedin.com/in/abdur-rehman-software-engineer/',
-    'https://github.com/Abdur-Rehman-01',
+    'https://www.linkedin.com/in/abdul-rehman-solution-engineer/',
+    'https://github.com/abdulrehman4702',
   ],
   knowsAbout: [
     'React',

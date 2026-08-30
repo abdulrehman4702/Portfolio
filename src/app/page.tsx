@@ -6,9 +6,7 @@ import Skills from '../components/Skills';
 import Projects from '../components/Projects';
 import Experience from '../components/Experience';
 import Education from '../components/Education';
-import Contact from '../components/Contact';
-import Testimonials from '../app/testimonials/page';
-import ContentCreator from '../components/ContentCreator';
+
 export default function Home() {
   return (
     <div className="scroll-smooth">
@@ -21,10 +19,7 @@ export default function Home() {
         <Skills />
         <Projects />
         <Experience />
-        {/* <Testimonials /> */}
-        {/* <ContentCreator /> */}
         <Education />
-        <Contact />
       </motion.div>
     </div>
   );

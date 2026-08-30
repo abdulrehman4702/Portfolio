@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes: MetadataRoute.Sitemap = [
     { url: siteUrl, ...base, priority: 1 },
     { url: `${siteUrl}/services`, ...base, priority: 0.9 },
+    { url: `${siteUrl}/contact`, ...base, priority: 0.95 },
     { url: `${siteUrl}/testimonials`, ...base, priority: 0.7 },
     ...contentSlugs.map((slug) => ({
       url: `${siteUrl}/Content/${slug}`,
