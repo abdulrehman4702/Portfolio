@@ -118,21 +118,17 @@ const experiences: ExperienceCompany[] = [
 ];
 
 function CompanyLogo({ company }: { company: ExperienceCompany }) {
-  const size = 48;
   if (company.logoUrl) {
     return (
-      <div className="relative flex-shrink-0 rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm" style={{ width: size, height: size }}>
+      <div className="relative flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={company.logoUrl} alt={`${company.name} logo`} width={size} height={size} className="w-full h-full object-cover" />
+        <img src={company.logoUrl} alt={`${company.name} logo`} className="w-full h-full object-cover" />
       </div>
     );
   }
   return (
-    <div
-      className="flex-shrink-0 rounded-2xl overflow-hidden bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 flex items-center justify-center text-orange-600 dark:text-orange-400 font-bold"
-      style={{ width: size, height: size }}
-    >
-      <Briefcase className="w-5 h-5" />
+    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl overflow-hidden bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 flex items-center justify-center text-orange-600 dark:text-orange-400 font-bold">
+      <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />
     </div>
   );
 }
@@ -157,45 +153,45 @@ function ExperienceCard({
           ? { duration: 0.25, delay: (companyIndex - INITIAL_VISIBLE) * 0.05 }
           : { duration: 0.4, delay: companyIndex * 0.06 }
       }
-      className="relative flex gap-5 pb-8 last:pb-0 group"
+      className="relative flex gap-3 sm:gap-5 pb-8 last:pb-0 group"
     >
       {/* Timeline Node */}
-      <div className="flex flex-col items-center flex-shrink-0" style={{ width: 48 }}>
-        <div className="relative z-10 w-3.5 h-3.5 rounded-full bg-orange-500 border-4 border-white dark:border-slate-950 shadow-md shadow-orange-500/30 group-hover:scale-125 transition-transform" aria-hidden />
+      <div className="flex flex-col items-center flex-shrink-0 w-6 sm:w-12">
+        <div className="relative z-10 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-orange-500 border-2 sm:border-4 border-white dark:border-slate-950 shadow-md shadow-orange-500/30 group-hover:scale-125 transition-transform" aria-hidden />
       </div>
 
       {/* Card Content */}
-      <div className="flex-1 min-w-0 text-left bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-lg hover:border-orange-400/60 dark:hover:border-orange-500/50 transition-all duration-300">
-        <div className="flex items-start gap-4">
+      <div className="flex-1 min-w-0 text-left bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-7 shadow-sm hover:shadow-lg hover:border-orange-400/60 dark:hover:border-orange-500/50 transition-all duration-300">
+        <div className="flex items-start gap-3 sm:gap-4">
           <CompanyLogo company={company} />
-          <div>
-            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">{company.name}</h3>
-            <p className="text-xs font-semibold text-orange-600 dark:text-orange-400 mt-0.5">{company.workMode}</p>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight truncate sm:whitespace-normal">{company.name}</h3>
+            <p className="text-[11px] sm:text-xs font-semibold text-orange-600 dark:text-orange-400 mt-0.5">{company.workMode}</p>
             {company.positions[0]?.location && (
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{company.positions[0].location}</p>
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate sm:whitespace-normal">{company.positions[0].location}</p>
             )}
           </div>
         </div>
 
-        <ul className="mt-5 space-y-4 list-none p-0 m-0 border-t border-slate-100 dark:border-slate-800 pt-4">
+        <ul className="mt-4 sm:mt-5 space-y-4 list-none p-0 m-0 border-t border-slate-100 dark:border-slate-800 pt-4">
           {company.positions.map((position, positionIndex) => {
             const isFirst = positionIndex === 0;
             const firstLocation = company.positions[0]?.location;
             const showLocation = position.location && position.location !== firstLocation;
             return (
-              <li key={`${company.name}-${position.title}-${positionIndex}`} className="relative pl-4 border-l-2 border-orange-500/40">
-                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">{position.title}</h4>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              <li key={`${company.name}-${position.title}-${positionIndex}`} className="relative pl-3 sm:pl-4 border-l-2 border-orange-500/40">
+                <h4 className="text-xs sm:text-base font-bold text-slate-900 dark:text-white">{position.title}</h4>
+                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   {position.period}
                   {showLocation && ` · ${position.location}`}
                 </p>
                 {isFirst && position.description && (
-                  <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-justify">{position.description}</p>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{position.description}</p>
                 )}
                 {position.skills.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-1.5 text-left">
+                  <div className="mt-2.5 sm:mt-3 flex flex-wrap gap-1 sm:gap-1.5 text-left">
                     {position.skills.map((skill) => (
-                      <span key={skill} className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                      <span key={skill} className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-[11px] font-semibold text-slate-600 dark:text-slate-300">
                         {skill}
                       </span>
                     ))}
@@ -213,25 +209,25 @@ function ExperienceCard({
 export default function Experience() {
   const [showAllExperience, setShowAllExperience] = useState(false);
   const visibleExperiences = showAllExperience ? experiences : experiences.slice(0, INITIAL_VISIBLE);
-  const hasMore = experiences.length > INITIAL_VISIBLE && !showAllExperience;
 
   return (
-    <section id="experience" className="section bg-slate-50/50 dark:bg-slate-950/50 text-foreground w-full py-20 border-t border-slate-200/70 dark:border-slate-800/70">
-      <div className="container text-left mx-auto max-w-5xl">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+    <section id="experience" className="section bg-slate-50/50 dark:bg-slate-950/50 text-foreground w-full py-16 sm:py-20 border-t border-slate-200/70 dark:border-slate-800/70">
+      <div className="container text-left mx-auto px-4 sm:px-6 max-w-5xl">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <span className="inline-flex items-center rounded-full bg-teal-50 dark:bg-teal-950/50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 ring-1 ring-teal-200/80 dark:ring-teal-800 mb-3">
             Career Timeline
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Professional Experience
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+          <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300">
             Track record of driving software development, AI solutions, and system engineering across remote international companies and fast-paced tech hubs.
           </p>
         </div>
 
-        <div className="mt-10 max-w-4xl mx-auto relative">
-          <div className="absolute left-[23px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 via-amber-400 to-slate-200 dark:to-slate-800" aria-hidden />
+        <div className="mt-8 sm:mt-10 max-w-4xl mx-auto relative">
+          {/* Responsive Vertical Line */}
+          <div className="absolute left-[11px] sm:left-[23px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 via-amber-400 to-slate-200 dark:to-slate-800" aria-hidden />
 
           <ul className="space-y-0 list-none p-0 m-0">
             {visibleExperiences.map((company, companyIndex) => (
@@ -243,15 +239,15 @@ export default function Experience() {
               />
             ))}
             {experiences.length > INITIAL_VISIBLE && (
-              <li className="relative flex gap-5 pb-8">
-                <div className="flex flex-col items-center flex-shrink-0" style={{ width: 48 }}>
-                  <div className="relative z-10 w-3.5 h-3.5 rounded-full border-2 border-dashed border-orange-500 bg-white dark:bg-slate-950" aria-hidden />
+              <li className="relative flex gap-3 sm:gap-5 pb-8">
+                <div className="flex flex-col items-center flex-shrink-0 w-6 sm:w-12">
+                  <div className="relative z-10 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full border-2 border-dashed border-orange-500 bg-white dark:bg-slate-950" aria-hidden />
                 </div>
                 <div className="flex-1 min-w-0">
                   <button
                     type="button"
                     onClick={() => setShowAllExperience(!showAllExperience)}
-                    className="w-full rounded-2xl border-2 border-dashed border-orange-300 dark:border-orange-500/40 bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-100/60 dark:hover:bg-orange-900/30 transition-all duration-200 py-4 px-6 flex items-center justify-center gap-2 group shadow-sm"
+                    className="w-full rounded-2xl border-2 border-dashed border-orange-300 dark:border-orange-500/40 bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-100/60 dark:hover:bg-orange-900/30 transition-all duration-200 py-3.5 sm:py-4 px-4 sm:px-6 flex items-center justify-center gap-2 group shadow-sm"
                   >
                     <span className="text-xs sm:text-sm font-bold text-orange-700 dark:text-orange-400 group-hover:text-orange-800 dark:group-hover:text-orange-300">
                       {showAllExperience

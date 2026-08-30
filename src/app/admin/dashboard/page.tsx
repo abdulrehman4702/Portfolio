@@ -262,16 +262,16 @@ export default function AdminDashboardPage() {
               return (
                 <div
                   key={msg._id}
-                  className={`rounded-3xl border transition-all p-6 sm:p-7 ${
+                  className={`rounded-2xl sm:rounded-3xl border transition-all p-4 sm:p-6 md:p-7 ${
                     isUnread
                       ? 'bg-orange-50/30 dark:bg-orange-950/20 border-orange-300 dark:border-orange-500/40 shadow-md'
                       : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 shadow-sm'
                   }`}
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
                     <div className="space-y-1">
-                      <div className="flex items-center gap-2.5">
-                        <span className="flex items-center gap-1.5 font-bold text-slate-900 dark:text-white text-base">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="flex items-center gap-1.5 font-bold text-slate-900 dark:text-white text-sm sm:text-base">
                           <FaUser className="w-3.5 h-3.5 text-slate-400" />
                           {msg.name}
                         </span>
