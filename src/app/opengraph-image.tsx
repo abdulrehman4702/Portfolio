@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 
-export const alt = 'Abdur Rehman — Full-Stack Developer & AI Solutions Engineer';
+export const alt = 'Abdur Rehman — Full-Stack Architect & AI Solutions Engineer';
 export const size = {
   width: 1200,
   height: 630,
@@ -19,64 +19,95 @@ export default async function Image() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          backgroundColor: '#0b0f19',
+          backgroundColor: '#070a13',
           backgroundImage:
-            'radial-gradient(circle at 50% 0%, #1e293b 0%, transparent 75%), radial-gradient(circle at 100% 100%, rgba(249, 115, 22, 0.08) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(13, 148, 136, 0.08) 0%, transparent 50%)',
-          padding: '52px 64px',
+            'radial-gradient(circle at 50% 10%, rgba(30, 41, 59, 0.6) 0%, transparent 70%), radial-gradient(circle at 90% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 45%), radial-gradient(circle at 10% 80%, rgba(13, 148, 136, 0.15) 0%, transparent 45%)',
+          padding: '48px 56px',
           fontFamily: 'sans-serif',
           position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        {/* Subtle Ambient Light Gradients */}
+        {/* Giant Watermark Background Typography "DEVELOPER" */}
         <div
           style={{
             position: 'absolute',
-            top: '-50px',
-            right: '150px',
-            width: '320px',
-            height: '320px',
+            top: '110px',
+            left: '0',
+            right: '0',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '150px',
+            fontWeight: 900,
+            letterSpacing: '24px',
+            color: 'rgba(255, 255, 255, 0.035)',
+            textTransform: 'uppercase',
+            zIndex: 1,
+            userSelect: 'none',
+          }}
+        >
+          DEVELOPER
+        </div>
+
+        {/* Ambient Glows */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-60px',
+            right: '80px',
+            width: '380px',
+            height: '380px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(249, 115, 22, 0.18) 0%, rgba(249, 115, 22, 0) 70%)',
+            background: 'radial-gradient(circle, rgba(249, 115, 22, 0.22) 0%, rgba(249, 115, 22, 0) 70%)',
           }}
         />
         <div
           style={{
             position: 'absolute',
-            bottom: '-60px',
-            left: '100px',
-            width: '350px',
-            height: '350px',
+            bottom: '-70px',
+            left: '60px',
+            width: '400px',
+            height: '400px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(13, 148, 136, 0.15) 0%, rgba(13, 148, 136, 0) 70%)',
+            background: 'radial-gradient(circle, rgba(13, 148, 136, 0.18) 0%, rgba(13, 148, 136, 0) 70%)',
           }}
         />
 
-        {/* Top Bar: Brand & Status */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        {/* Top Header Bar */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            zIndex: 10,
+          }}
+        >
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '46px',
-                height: '46px',
-                borderRadius: '14px',
-                background: 'linear-gradient(135deg, #f97316 0%, #f59e0b 100%)',
+                width: '44px',
+                height: '44px',
+                borderRadius: '12px',
+                background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
                 color: '#ffffff',
-                fontSize: '20px',
+                fontSize: '18px',
                 fontWeight: 900,
-                boxShadow: '0 8px 20px -4px rgba(249, 115, 22, 0.4)',
+                boxShadow: '0 8px 20px -4px rgba(249, 115, 22, 0.5)',
               }}
             >
               AR
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
+              <span style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
                 Abdur Rehman
               </span>
               <span style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8' }}>
-                Full-Stack &amp; AI Solutions Engineer
+                Full-Stack Architect &amp; AI Solutions Engineer
               </span>
             </div>
           </div>
@@ -86,10 +117,10 @@ export default async function Image() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              padding: '6px 14px',
+              padding: '6px 16px',
               borderRadius: '999px',
-              backgroundColor: 'rgba(13, 148, 136, 0.12)',
-              border: '1px solid rgba(13, 148, 136, 0.35)',
+              backgroundColor: 'rgba(13, 148, 136, 0.15)',
+              border: '1px solid rgba(13, 148, 136, 0.4)',
               color: '#2dd4bf',
               fontSize: '12px',
               fontWeight: 700,
@@ -103,101 +134,114 @@ export default async function Image() {
                 backgroundColor: '#2dd4bf',
               }}
             />
-            <span>Available for Opportunities</span>
+            <span>Open for Strategic Roles &amp; Projects</span>
           </div>
         </div>
 
-        {/* Middle Main Content: Balanced Card Box */}
+        {/* Middle Main Content: Hero Headline & Description */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '12px',
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '20px',
-            padding: '32px 36px',
-            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.3)',
+            zIndex: 10,
+            marginTop: '8px',
           }}
         >
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span
               style={{
-                padding: '4px 10px',
-                borderRadius: '6px',
+                padding: '4px 12px',
+                borderRadius: '999px',
                 backgroundColor: 'rgba(249, 115, 22, 0.15)',
+                border: '1px solid rgba(249, 115, 22, 0.35)',
                 color: '#fb923c',
                 fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.5px',
+                fontWeight: 800,
+                letterSpacing: '0.8px',
                 textTransform: 'uppercase',
               }}
             >
-              MERN Stack · Next.js 14 · Cloud (GCP)
+              ⚡ PRODUCTION MERN · NEXT.JS 14 · GCP CLOUD
             </span>
           </div>
 
           <h1
             style={{
-              fontSize: '38px',
-              fontWeight: 800,
+              fontSize: '48px',
+              fontWeight: 900,
               color: '#ffffff',
-              lineHeight: 1.2,
+              lineHeight: 1.08,
               margin: 0,
-              letterSpacing: '-0.8px',
+              letterSpacing: '-1px',
+              textTransform: 'uppercase',
             }}
           >
-            Building High-Performance Web Apps &amp; <span style={{ color: '#f97316' }}>AI Solutions</span>
+            FULL-STACK ARCHITECT <br />
+            <span style={{ color: '#f97316' }}>&amp; AI SOLUTIONS ENGINEER</span>
           </h1>
 
           <p
             style={{
               fontSize: '17px',
-              color: '#94a3b8',
+              color: '#cbd5e1',
               lineHeight: 1.45,
               margin: 0,
+              maxWidth: '920px',
             }}
           >
-            Experienced full-stack engineer specialized in scalable SaaS architectures, clean APIs, real-time workflows, and production AI platforms.
+            “Specializing in high-performance Full-Stack development across the MERN Stack, Next.js 14, and GCP Cloud Architecture. I architect scalable microservices, resilient APIs, and intelligent AI workflows.”
           </p>
         </div>
 
-        {/* Bottom Bar: Tech Chips & Verified Domain */}
+        {/* Bottom Bar: Tech Stack Pills & Deliverable Stats */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            paddingTop: '20px',
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            zIndex: 10,
           }}
         >
           <div style={{ display: 'flex', gap: '8px' }}>
-            {['React / Next.js', 'Node.js', 'MongoDB', 'AI Agents', 'GCP Deployment'].map((tech) => (
+            {[
+              'Next.js 14 & React',
+              'Node.js & Express',
+              'AI Agents & LLMs',
+              'GCP Cloud & Docker',
+            ].map((badge) => (
               <div
-                key={tech}
+                key={badge}
                 style={{
-                  padding: '6px 12px',
-                  borderRadius: '8px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  color: '#cbd5e1',
+                  padding: '6px 14px',
+                  borderRadius: '999px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  color: '#e2e8f0',
                   fontSize: '12px',
                   fontWeight: 600,
                 }}
               >
-                {tech}
+                {badge}
               </div>
             ))}
           </div>
 
           <div
             style={{
-              fontSize: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              fontSize: '13px',
               fontWeight: 700,
-              color: '#f97316',
-              letterSpacing: '-0.2px',
+              color: '#94a3b8',
             }}
           >
-            portfolio-abdur-rehman.vercel.app
+            <span style={{ color: '#fb923c' }}>⚡ 15+ Deliverables</span>
+            <span>•</span>
+            <span style={{ color: '#ffffff' }}>🌐 Global Platforms</span>
           </div>
         </div>
       </div>
