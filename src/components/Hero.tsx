@@ -49,53 +49,72 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative overflow-x-clip pt-18 sm:pt-20 lg:pt-22 pb-4 sm:pb-6 lg:pb-6 min-h-[100dvh] lg:h-screen lg:max-h-[1080px] flex flex-col justify-between"
+      className="relative w-full overflow-x-clip pt-16 sm:pt-18 lg:pt-20 pb-3 sm:pb-4 lg:pb-5 min-h-[100dvh] lg:h-screen lg:max-h-[1080px] flex flex-col justify-between"
     >
       {/* Dynamic Background Ambient Glows reacting to scroll */}
       <motion.div
         style={{ y: glowY }}
-        className="pointer-events-none absolute top-4 left-1/2 -translate-x-1/2 w-[90vw] max-w-[1000px] h-[50vh] max-h-[500px] bg-gradient-to-b from-orange-500/15 via-teal-500/10 to-transparent blur-[120px] -z-10"
+        className="pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 w-full max-w-[1500px] h-[50vh] max-h-[500px] bg-gradient-to-b from-orange-500/15 via-teal-500/10 to-transparent blur-[140px] -z-10"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -left-20 top-24 w-72 h-72 rounded-full bg-orange-500/10 blur-[110px] -z-10"
+        className="pointer-events-none absolute -left-20 top-24 w-80 h-80 rounded-full bg-orange-500/10 blur-[120px] -z-10"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -right-20 top-40 w-72 h-72 rounded-full bg-teal-500/10 blur-[110px] -z-10"
+        className="pointer-events-none absolute -right-20 top-40 w-80 h-80 rounded-full bg-teal-500/10 blur-[120px] -z-10"
         aria-hidden="true"
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 flex-1 flex flex-col justify-between gap-3 sm:gap-4 lg:gap-6">
+      {/* FULL-WIDTH VIEWPORT-FIT CONTAINER (No artificial max-w-7xl restriction) */}
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-20 relative z-10 flex-1 flex flex-col justify-between gap-2.5 sm:gap-3.5 lg:gap-4 min-h-0">
         
-        {/* 1. CENTER STAGE: GIANT "DEVELOPER" TEXT + PARALLAX CUTOUT IMAGE */}
-        <div className="relative flex-1 flex items-center justify-center min-h-[220px] sm:min-h-[280px] lg:min-h-[320px] max-h-[46vh] my-auto">
+        {/* 1. CENTER STAGE: FULL-WIDTH 100% SPAN "DEVELOPER" TEXT + PARALLAX CUTOUT IMAGE */}
+        <div className="relative flex-1 flex items-center justify-center min-h-[200px] sm:min-h-[260px] lg:min-h-[300px] max-h-[46vh] my-auto">
           
-          {/* Massive Background Typography: "DEVELOPER" with Full Responsive Scale */}
+          {/* Full Screen Width Edge-to-Edge "DEVELOPER" Typography (Zero Clipping Guaranteed) */}
           <motion.div
             style={{ y: yText }}
-            initial={{ opacity: 0, scale: 0.94, filter: 'blur(10px)' }}
+            initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 w-full h-full flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden"
+            className="absolute inset-0 w-full h-full flex items-center justify-center select-none pointer-events-none z-0 px-2 sm:px-4"
             aria-hidden="true"
           >
-            <span className="w-full font-black tracking-[0.02em] xs:tracking-[0.04em] sm:tracking-[0.07em] md:tracking-[0.1em] lg:tracking-[0.14em] text-[11vw] xs:text-[11.6vw] sm:text-[12.5vw] md:text-[13vw] lg:text-[min(13.5vw,17vh)] xl:text-[min(14vw,20vh)] leading-none uppercase text-slate-200/90 dark:text-slate-800/80 text-center transition-colors duration-300 whitespace-nowrap block drop-shadow-sm">
-              DEVELOPER
-            </span>
+            <svg
+              viewBox="0 0 1000 140"
+              className="w-full h-auto max-h-[36vh] overflow-visible"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <text
+                x="500"
+                y="85"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                textLength="970"
+                lengthAdjust="spacingAndGlyphs"
+                className="font-black fill-slate-200/90 dark:fill-slate-800/85 transition-colors duration-300 uppercase tracking-wide"
+                style={{
+                  fontWeight: 900,
+                  fontSize: '120px',
+                }}
+              >
+                DEVELOPER
+              </text>
+            </svg>
           </motion.div>
 
-          {/* Floating Live Tech Badges (Left & Right) on larger screens */}
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:flex justify-between max-w-6xl mx-auto z-20">
+          {/* Floating Live Tech Badges (Left & Right) on wide screens */}
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:flex justify-between w-full max-w-7xl mx-auto px-4 z-20">
             {/* Left Floating Card */}
             <motion.div
               initial={{ opacity: 0, x: -35, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="p-3 rounded-2xl bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 shadow-xl shadow-slate-900/5 max-w-[190px]"
+              className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-900/5 max-w-[190px]"
             >
               <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white">
-                <span className="p-1 rounded-lg bg-orange-500/10 text-orange-500">
+                <span className="p-1.5 rounded-lg bg-orange-500/10 text-orange-500">
                   <FaCode className="w-3 h-3" />
                 </span>
                 <span>Full-Stack Core</span>
@@ -110,11 +129,11 @@ export default function Hero() {
               initial={{ opacity: 0, x: 35, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="p-3 rounded-2xl bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 shadow-xl shadow-slate-900/5 max-w-[190px] text-right"
+              className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-900/5 max-w-[190px] text-right"
             >
               <div className="flex items-center justify-end gap-2 text-xs font-bold text-slate-900 dark:text-white">
                 <span>AI &amp; Cloud Infra</span>
-                <span className="p-1 rounded-lg bg-teal-500/10 text-teal-500">
+                <span className="p-1.5 rounded-lg bg-teal-500/10 text-teal-500">
                   <FaCloud className="w-3 h-3" />
                 </span>
               </div>
@@ -124,7 +143,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Center Cutout Portrait (Layered with responsive height) */}
+          {/* Center Cutout Portrait (Layered with viewport-fitting height) */}
           <motion.div
             style={{ y: yImage, scale: scaleImage }}
             initial={{ opacity: 0, y: 30, scale: 0.94, filter: 'blur(8px)' }}
@@ -138,10 +157,10 @@ export default function Hero() {
               title="Click to expand photo"
             >
               {/* Soft atmospheric backlight halo */}
-              <div className="pointer-events-none absolute -inset-6 rounded-full bg-gradient-to-b from-orange-500/20 via-teal-500/10 to-transparent blur-2xl group-hover:scale-110 transition-transform duration-500 -z-10" />
+              <div className="pointer-events-none absolute -inset-6 rounded-full bg-gradient-to-b from-orange-500/25 via-teal-500/15 to-transparent blur-2xl group-hover:scale-110 transition-transform duration-500 -z-10" />
 
               {/* Transparent Cutout Image */}
-              <div className="relative h-[220px] xs:h-[260px] sm:h-[310px] md:h-[360px] lg:h-[min(46vh,420px)] w-auto aspect-[3/4] flex items-end justify-center">
+              <div className="relative h-[210px] xs:h-[250px] sm:h-[300px] md:h-[350px] lg:h-[min(44vh,400px)] xl:h-[min(46vh,430px)] w-auto aspect-[3/4] flex items-end justify-center">
                 <Image
                   src="/images/profile-transparent.png"
                   alt="Abdur Rehman - Full Stack Developer & AI Solutions Engineer"
@@ -151,7 +170,7 @@ export default function Hero() {
                   className="w-full h-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.03]"
                   style={{
                     filter:
-                      'drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+                      'drop-shadow(0 15px 25px rgba(0, 0, 0, 0.45)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
                   }}
                 />
 
@@ -164,7 +183,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* 3. TECH HIGHLIGHTS PILL ROW */}
+        {/* 2. TECH HIGHLIGHTS PILL ROW */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -179,7 +198,7 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.06 }}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 text-[11px] sm:text-xs font-medium text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur-md hover:border-orange-500/50 hover:shadow transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm backdrop-blur-md hover:border-orange-500/60 hover:shadow transition-all"
               >
                 <Icon className={`w-3 h-3 ${badge.color}`} />
                 <span>{badge.label}</span>
@@ -188,22 +207,22 @@ export default function Hero() {
           })}
         </motion.div>
 
-        {/* 4. BOTTOM ROW: Social Badges (Left) | Bold Headline (Right) */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-3 sm:gap-4 z-20 shrink-0">
+        {/* 3. BOTTOM ROW: Social Badges (Left) | Bold Headline (Right) */}
+        <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-3 sm:gap-4 z-20 shrink-0 text-center md:text-left">
           
           {/* Bottom Left: Social Badges & Actions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-2 sm:gap-2.5"
+            className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-2.5"
           >
             {/* LinkedIn Badge */}
             <a
               href="https://www.linkedin.com/in/abdul-rehman-solution-engineer/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-[#0A66C2] dark:hover:border-[#0A66C2] shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-[#0A66C2] dark:hover:border-[#0A66C2] shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200"
               aria-label="LinkedIn Profile"
             >
               <span className="flex h-4.5 w-4.5 items-center justify-center rounded bg-[#0A66C2] text-white text-[10px]">
@@ -217,7 +236,7 @@ export default function Hero() {
               href="https://github.com/abdulrehman4702"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-900 dark:hover:border-white shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-900 dark:hover:border-white shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200"
               aria-label="GitHub Profile"
             >
               <span className="flex h-4.5 w-4.5 items-center justify-center rounded bg-slate-900 dark:bg-slate-800 text-white text-[10px]">
@@ -229,7 +248,7 @@ export default function Hero() {
             {/* Email Contact Pill */}
             <a
               href="mailto:abdulrehman2001y@gmail.com"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-500 shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-500 shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200"
               aria-label="Email Abdur Rehman"
             >
               <span className="flex h-4.5 w-4.5 items-center justify-center rounded bg-orange-500 text-white text-[9px]">
@@ -243,7 +262,7 @@ export default function Hero() {
               href="/Rehman_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-all text-[11px] sm:text-xs font-bold text-orange-700 dark:text-orange-300"
+              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-all text-[11px] sm:text-xs font-bold text-orange-700 dark:text-orange-300 shadow-sm"
             >
               <FaFileDownload className="w-3 h-3 text-orange-500" />
               <span>Resume</span>
@@ -255,26 +274,26 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-            className="text-left md:text-right"
+            className="text-center md:text-right"
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight text-slate-900 dark:text-white leading-none">
               FULL-STACK ARCHITECT
             </h2>
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-orange-600 dark:text-orange-400 mt-1">
+            <p className="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.16em] text-orange-600 dark:text-orange-400 mt-1">
               &amp; AI Solutions Engineer
             </p>
           </motion.div>
         </div>
 
-        {/* 5. BOTTOM BIO QUOTE & STATS */}
+        {/* 4. BOTTOM BIO QUOTE & STATS */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="pt-3 border-t border-slate-200/80 dark:border-slate-800/80 text-center sm:text-left z-20 flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-6 shrink-0"
+          className="pt-2.5 sm:pt-3 border-t border-slate-200/80 dark:border-slate-800/80 text-center md:text-left z-20 flex flex-col lg:flex-row items-center justify-between gap-2.5 sm:gap-3 lg:gap-6 shrink-0"
         >
-          <div className="max-w-4xl space-y-1">
-            <p className="text-[11px] sm:text-xs md:text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-normal">
+          <div className="max-w-5xl space-y-1">
+            <p className="text-[11px] sm:text-xs md:text-[13px] lg:text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-normal">
               &ldquo;Specializing in high-performance Full-Stack development across the{' '}
               <strong className="font-semibold text-slate-900 dark:text-white">
                 MERN Stack, Next.js 14, and GCP Cloud Architecture
@@ -282,12 +301,18 @@ export default function Hero() {
               . I architect scalable microservices, resilient REST &amp; WebSocket APIs, and intelligent AI
               workflows designed for concurrency and security.&rdquo;
             </p>
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 sm:gap-3 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium">
-              <span>⚡ 15+ Production Deliverables</span>
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+              <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
+                ⚡ 15+ Production Deliverables
+              </span>
               <span>•</span>
-              <span>🔒 Multi-Tenant &amp; Role-Based Security</span>
+              <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
+                🔒 Multi-Tenant &amp; Role-Based Security
+              </span>
               <span>•</span>
-              <span>🌐 International Client Platforms</span>
+              <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
+                🌐 International Client Platforms
+              </span>
             </div>
           </div>
 
