@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { siteUrl } from '../lib/seo';
 
 export const runtime = 'edge';
 
@@ -10,19 +11,7 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
-  // Read transparent profile image buffer via import.meta.url for 100% reliable edge rendering
-  let profileBase64 = '';
-  try {
-    const imgUrl = new URL('../../public/images/profile-transparent.png', import.meta.url);
-    const res = await fetch(imgUrl);
-    if (res.ok) {
-      const arrayBuffer = await res.arrayBuffer();
-      const base64 = Buffer.from(arrayBuffer).toString('base64');
-      profileBase64 = `data:image/png;base64,${base64}`;
-    }
-  } catch (e) {
-    console.error('Error reading profile image for OG:', e);
-  }
+  const profileImageUrl = `${siteUrl}/images/profile-transparent.png`;
 
   return new ImageResponse(
     (
@@ -129,48 +118,28 @@ export default async function Image() {
           </div>
 
           {/* Center Cutout Portrait */}
-          {profileBase64 ? (
-            <div
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+              height: '330px',
+              width: '280px',
+              zIndex: 5,
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={profileImageUrl}
+              alt="Abdur Rehman"
               style={{
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'center',
-                height: '330px',
-                width: '280px',
-                zIndex: 5,
+                height: '100%',
+                width: 'auto',
+                objectFit: 'contain',
               }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={profileBase64}
-                alt="Abdur Rehman"
-                style={{
-                  height: '100%',
-                  width: 'auto',
-                  objectFit: 'contain',
-                }}
-              />
-            </div>
-          ) : (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '160px',
-                height: '160px',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
-                color: '#ffffff',
-                fontSize: '56px',
-                fontWeight: 900,
-                zIndex: 5,
-              }}
-            >
-              AR
-            </div>
-          )}
+            />
+          </div>
 
           {/* Right Floating Card */}
           <div
