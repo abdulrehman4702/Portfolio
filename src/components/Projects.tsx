@@ -1,25 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import {
-  FaExternalLinkAlt,
   FaGithub,
   FaTimes,
   FaCheck,
   FaLayerGroup,
-  FaArrowRight,
-  FaArrowLeft,
-  FaFire,
   FaStar,
   FaCode,
-  FaServer,
-  FaBrain,
-  FaCloud,
-  FaChevronLeft,
-  FaChevronRight,
   FaExpand,
+  FaFire,
+  FaExternalLinkAlt,
+  FaChevronDown,
+  FaChevronUp,
 } from 'react-icons/fa';
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
 import type { Project } from '../types';
@@ -238,66 +233,25 @@ const projects: Project[] = [
   },
 ];
 
-const categories = [
-  { id: 'all', label: 'All Showcase' },
-  { id: 'ai', label: 'AI & Platforms' },
-  { id: 'client', label: 'Client & Enterprise' },
-  { id: 'fullstack', label: 'Full-Stack Apps' },
-  { id: 'research', label: 'Research & ML' },
-] as const;
-
 export default function Projects() {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedModalProject, setSelectedModalProject] = useState<Project | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const filteredProjects = projects.filter((p) => {
-    if (activeCategory === 'all') return true;
-    return p.category === activeCategory;
-  });
-
-  // Reset index when filter changes if out of bounds
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [activeCategory]);
-
-  // Automatic slide rotation every 5 seconds (pauses on hover or when modal is open)
-  useEffect(() => {
-    if (!isAutoPlay || isHovered || selectedModalProject !== null || filteredProjects.length <= 1) {
-      return;
-    }
-
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
-    }, 5500);
-
-    return () => clearInterval(timer);
-  }, [isAutoPlay, isHovered, selectedModalProject, filteredProjects.length, currentIndex]);
-
-  const activeProject = filteredProjects[currentIndex] || filteredProjects[0] || projects[0];
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length);
-  };
+  // Initial display shows top 6 projects to keep mobile scroll fast & clean
+  const displayedProjects = isExpanded ? projects : projects.slice(0, 6);
 
   return (
     <section
       id="projects"
-      className="relative overflow-x-clip py-20 lg:py-28 min-h-screen flex flex-col justify-between bg-slate-50/70 dark:bg-slate-950/70 border-y border-slate-200/80 dark:border-slate-800/80"
+      className="relative overflow-x-clip py-16 sm:py-24 lg:py-28 bg-slate-50/70 dark:bg-slate-950/70 border-y border-slate-200/80 dark:border-slate-800/80"
     >
-      {/* 1. Dynamic Ambient Background Glows */}
+      {/* Dynamic Ambient Background Glows */}
       <div
-        className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[90vw] max-w-[1100px] h-[550px] bg-gradient-to-b from-orange-500/15 via-teal-500/10 to-transparent blur-[140px] -z-10"
+        className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 w-[90vw] max-w-[1200px] h-[550px] bg-gradient-to-b from-orange-500/15 via-teal-500/10 to-transparent blur-[150px] -z-10"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -left-20 top-1/3 w-80 h-80 rounded-full bg-orange-500/10 blur-[120px] -z-10"
+        className="pointer-events-none absolute -left-20 top-1/4 w-80 h-80 rounded-full bg-orange-500/10 blur-[120px] -z-10"
         aria-hidden="true"
       />
       <div
@@ -305,353 +259,201 @@ export default function Projects() {
         aria-hidden="true"
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 flex-1 flex flex-col justify-between">
-        
-        {/* 2. Top Header & Category Filter Controls */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-slate-800/80">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500/10 dark:bg-orange-500/20 px-3 py-1 text-xs font-bold text-orange-600 dark:text-orange-400 ring-1 ring-orange-500/30">
-                <FaFire className="w-3 h-3 text-orange-500 animate-pulse" />
-                Auto-Showcase
-              </span>
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
-                {String(currentIndex + 1).padStart(2, '0')} / {String(filteredProjects.length).padStart(2, '0')}
-              </span>
-              {/* Active countdown pulse bar */}
-              <div className="w-16 h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden ml-1">
-                <motion.div
-                  key={`${activeProject.title}-${isHovered}`}
-                  initial={{ width: '0%' }}
-                  animate={{ width: isHovered || !isAutoPlay ? '0%' : '100%' }}
-                  transition={{ duration: 5.5, ease: 'linear' }}
-                  className="h-full bg-gradient-to-r from-orange-500 to-amber-500 rounded-full"
-                />
-              </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        {/* 1. Clean Header Section */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 sm:pb-8 border-b border-slate-200/80 dark:border-slate-800/80">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-orange-500/10 dark:bg-orange-500/20 px-3 py-1 text-xs font-bold text-orange-600 dark:text-orange-400 ring-1 ring-orange-500/30 mb-2.5">
+              <FaFire className="w-3 h-3 text-orange-500" />
+              <span>PORTFOLIO SHOWCASE</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
-              Featured Platforms &amp; Systems
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight text-slate-900 dark:text-white leading-tight">
+              Featured Projects &amp; Systems
             </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
+              Enterprise platforms, autonomous AI pipelines, and production full-stack solutions.
+            </p>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-            {categories.map((cat) => {
-              const isActive = activeCategory === cat.id;
-              const count =
-                cat.id === 'all'
-                  ? projects.length
-                  : projects.filter((p) => p.category === cat.id).length;
-
-              return (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`relative px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors duration-200 flex items-center gap-1.5 ${
-                    isActive
-                      ? 'text-white'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="projectActiveCategory"
-                      className="absolute inset-0 bg-slate-900 dark:bg-orange-500 rounded-xl shadow-md shadow-slate-900/15 dark:shadow-orange-500/20"
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">{cat.label}</span>
-                  <span
-                    className={`relative z-10 text-[10px] px-1.5 py-0.2 rounded-full font-semibold ${
-                      isActive
-                        ? 'bg-white/20 text-white'
-                        : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
+          <div className="shrink-0 text-xs font-bold text-slate-500 dark:text-slate-400">
+            {displayedProjects.length} of {projects.length} Deliverables
           </div>
         </div>
 
-        {/* 3. CENTER HERO STAGE: MASSIVE "PROJECTS" BACKGROUND + ACTIVE PROJECT SHOWCASE */}
-        <div
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="relative my-auto py-8 lg:py-12 flex items-center justify-center min-h-[500px] lg:min-h-[580px]"
+        {/* 2. Projects Gallery Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pt-8 sm:pt-10"
         >
-          
-          {/* Massive Responsive Background Typography: "PROJECTS" */}
-          <div
-            className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden"
-            aria-hidden="true"
-          >
-            <span className="w-full font-black tracking-[0.04em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] text-[12vw] xs:text-[13vw] sm:text-[14vw] md:text-[15vw] lg:text-[170px] xl:text-[210px] leading-none uppercase text-slate-200/90 dark:text-slate-800/80 text-center whitespace-nowrap block drop-shadow-sm transition-colors duration-300">
-              PROJECTS
-            </span>
-          </div>
-
-          {/* Active Project Hero Showcase Stage */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeProject.title}
-              initial={{ opacity: 0, y: 25, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -25, scale: 0.97 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center"
-            >
-              {/* Left Column: Project Overview & Capabilities (5 cols) */}
-              <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
-                
-                <div className="flex flex-wrap items-center gap-2">
-                  {activeProject.badge && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-500/20">
-                      <FaStar className="w-3 h-3" />
-                      {activeProject.badge}
-                    </span>
-                  )}
-                  {activeProject.liveUrl && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      Live Production
-                    </span>
-                  )}
-                </div>
-
-                <div>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight text-slate-900 dark:text-white leading-tight">
-                    {activeProject.title}
-                  </h3>
-                  {activeProject.tagline && (
-                    <p className="text-xs sm:text-sm font-semibold text-orange-600 dark:text-orange-400 mt-1">
-                      {activeProject.tagline}
-                    </p>
-                  )}
-                </div>
-
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                  {activeProject.description}
-                </p>
-
-                {/* Core Capabilities Chips */}
-                {activeProject.features && (
-                  <div className="pt-2">
-                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-700 dark:text-slate-300 mb-2">
-                      <FaLayerGroup className="w-3 h-3 text-orange-500" />
-                      <span>Architecture Modules ({activeProject.features.length}):</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {activeProject.features.slice(0, 4).map((f) => (
-                        <span
-                          key={f}
-                          className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-medium shadow-xs"
-                        >
-                          <FaCheck className="w-2.5 h-2.5 text-teal-500" />
-                          {f}
-                        </span>
-                      ))}
-                      {activeProject.features.length > 4 && (
-                        <span className="text-[11px] px-2 py-1 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold">
-                          +{activeProject.features.length - 4} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Direct Action Buttons */}
-                <div className="pt-3 flex flex-wrap items-center gap-3">
-                  {activeProject.liveUrl && (
-                    <a
-                      href={activeProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-xs sm:text-sm font-bold shadow-lg shadow-slate-900/15 dark:shadow-orange-500/20 transition-transform hover:scale-105"
-                    >
-                      <FaArrowUpRightFromSquare className="w-3.5 h-3.5" />
-                      <span>Visit Live Platform</span>
-                    </a>
-                  )}
-
-                  {activeProject.github && (
-                    <a
-                      href={activeProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-900 dark:hover:border-white text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-all shadow-sm"
-                    >
-                      <FaGithub className="w-3.5 h-3.5" />
-                      <span>Source Code</span>
-                    </a>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedModalProject(activeProject)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold transition-colors"
-                  >
-                    <FaExpand className="w-3 h-3 text-orange-500" />
-                    <span>Case Study</span>
-                  </button>
-                </div>
-
-              </div>
-
-              {/* Center/Right Column: Large High-Res Platform Mockup (7 cols) */}
-              <div className="lg:col-span-7 relative flex items-center justify-center">
-                
-                {/* Backlight Glow */}
-                <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-tr from-orange-500/20 via-teal-500/15 to-transparent blur-2xl -z-10" />
-
-                {/* Device Showcase Frame */}
+          <AnimatePresence>
+            {displayedProjects.map((project, idx) => (
+              <motion.article
+                key={project.title}
+                layout
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, delay: idx * 0.04 }}
+                className="group relative flex flex-col rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-md hover:shadow-xl hover:border-orange-500/60 dark:hover:border-orange-500/60 transition-all duration-300"
+              >
+                {/* Visual Thumbnail Area */}
                 <div
-                  onClick={() => setSelectedModalProject(activeProject)}
-                  className="group relative w-full h-[260px] sm:h-[340px] md:h-[400px] lg:h-[430px] rounded-3xl overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800 shadow-2xl cursor-pointer transition-transform duration-500 hover:scale-[1.02]"
-                  title="Click to expand case study"
+                  onClick={() => setSelectedModalProject(project)}
+                  className="relative h-44 sm:h-52 w-full overflow-hidden bg-slate-950 cursor-pointer"
+                  title="Click to view case study"
                 >
-                  {activeProject.image ? (
+                  {project.image ? (
                     <Image
-                      src={activeProject.image}
-                      alt={activeProject.title}
+                      src={project.image}
+                      alt={project.title}
                       fill
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-5xl font-black text-orange-500">
-                      {activeProject.title.charAt(0)}
+                    <div className="w-full h-full flex items-center justify-center text-4xl font-black text-orange-500">
+                      {project.title.charAt(0)}
                     </div>
                   )}
 
-                  {/* Gradient bottom bar overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/20 pointer-events-none" />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20" />
 
-                  {/* Floating Expand Icon */}
-                  <div className="absolute top-4 right-4 p-2.5 rounded-full bg-slate-900/80 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-                    <FaExpand className="w-3.5 h-3.5" />
+                  {/* Top Badges */}
+                  <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-2 pointer-events-none">
+                    {project.badge ? (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-slate-950/80 text-white backdrop-blur-md border border-white/15 shadow-sm">
+                        <FaStar className="w-2.5 h-2.5 text-orange-400" />
+                        <span>{project.badge}</span>
+                      </span>
+                    ) : (
+                      <span />
+                    )}
+
+                    {project.liveUrl && (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-emerald-950/80 text-emerald-300 backdrop-blur-md border border-emerald-500/30 shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Live</span>
+                      </span>
+                    )}
                   </div>
 
-                  {/* Bottom Tech Pills Overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-1.5 pointer-events-none">
-                    {activeProject.technologies.slice(0, 5).map((tech) => (
+                  {/* Hover Quick Expand Badge */}
+                  <div className="absolute bottom-3 right-3 p-2 rounded-xl bg-slate-900/80 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                    <FaExpand className="w-3 h-3" />
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div>
+                    <h3
+                      onClick={() => setSelectedModalProject(project)}
+                      className="text-base sm:text-lg font-black text-slate-900 dark:text-white tracking-tight hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer leading-snug"
+                    >
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                      {project.tagline || project.description}
+                    </p>
+                  </div>
+
+                  {/* Key Capabilities / Bullet points */}
+                  {project.features && project.features.length > 0 && (
+                    <div className="space-y-1 pt-1 border-t border-slate-100 dark:border-slate-800/80">
+                      {project.features.slice(0, 2).map((feature) => (
+                        <div key={feature} className="flex items-center gap-1.5 text-[11px] text-slate-700 dark:text-slate-300">
+                          <FaCheck className="w-2.5 h-2.5 text-teal-500 shrink-0" />
+                          <span className="truncate font-medium">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-1 pt-1">
+                    {project.technologies.slice(0, 3).map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-lg bg-slate-900/85 text-white backdrop-blur-md text-[11px] font-semibold border border-white/10"
+                        className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 text-[10px] sm:text-[10.5px] font-semibold border border-slate-200/60 dark:border-slate-700/50"
                       >
                         {tech}
                       </span>
                     ))}
-                    {activeProject.technologies.length > 5 && (
-                      <span className="px-2 py-1 rounded-lg bg-orange-500/85 text-white backdrop-blur-md text-[11px] font-bold">
-                        +{activeProject.technologies.length - 5}
+                    {project.technologies.length > 3 && (
+                      <span className="px-1.5 py-0.5 rounded-md bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-bold">
+                        +{project.technologies.length - 3}
                       </span>
                     )}
+                  </div>
+
+                  {/* Card Actions Footer */}
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-[11px] sm:text-xs font-bold transition-all shadow-xs active:scale-95"
+                        >
+                          <span>Live</span>
+                          <FaArrowUpRightFromSquare className="w-2.5 h-2.5" />
+                        </a>
+                      )}
+
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-[11px] sm:text-xs font-bold border border-slate-200 dark:border-slate-700 transition-all active:scale-95"
+                        >
+                          <FaGithub className="w-3 h-3" />
+                          <span>Code</span>
+                        </a>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedModalProject(project)}
+                      className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors ml-auto py-1 px-1.5"
+                    >
+                      <span>Details</span>
+                      <FaExpand className="w-2.5 h-2.5 text-orange-500" />
+                    </button>
                   </div>
                 </div>
-
-                {/* Left/Right Floating Navigation Arrows */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePrev();
-                  }}
-                  className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-white shadow-xl hover:scale-110 hover:border-orange-500 transition-all z-20"
-                  aria-label="Previous project"
-                >
-                  <FaChevronLeft className="w-3.5 h-3.5" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleNext();
-                  }}
-                  className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-white shadow-xl hover:scale-110 hover:border-orange-500 transition-all z-20"
-                  aria-label="Next project"
-                >
-                  <FaChevronRight className="w-3.5 h-3.5" />
-                </button>
-
-              </div>
-            </motion.div>
+              </motion.article>
+            ))}
           </AnimatePresence>
+        </motion.div>
 
-        </div>
-
-        {/* 4. Bottom Interactive Project Switcher Strip */}
-        <div className="pt-6 border-t border-slate-200/80 dark:border-slate-800/80">
-          <div className="flex items-center justify-between gap-4 mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Quick Switch Projects ({filteredProjects.length})
-            </span>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handlePrev}
-                className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-500 text-slate-700 dark:text-slate-300 transition-all text-xs font-bold flex items-center gap-1"
-              >
-                <FaArrowLeft className="w-2.5 h-2.5" />
-                <span>Prev</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-500 text-slate-700 dark:text-slate-300 transition-all text-xs font-bold flex items-center gap-1"
-              >
-                <span>Next</span>
-                <FaArrowRight className="w-2.5 h-2.5" />
-              </button>
-            </div>
+        {/* 3. Show More / Show Less Toggle Button (Prevents infinite scrolling) */}
+        {projects.length > 6 && (
+          <div className="mt-8 sm:mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="group inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-500 dark:hover:border-orange-500 shadow-md hover:shadow-lg text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-bold transition-all active:scale-95"
+            >
+              <span>
+                {isExpanded
+                  ? 'Show Less'
+                  : `View All ${projects.length} Projects`}
+              </span>
+              {isExpanded ? (
+                <FaChevronUp className="w-3 h-3 text-orange-500 transition-transform group-hover:-translate-y-0.5" />
+              ) : (
+                <FaChevronDown className="w-3 h-3 text-orange-500 transition-transform group-hover:translate-y-0.5" />
+              )}
+            </button>
           </div>
-
-          {/* Thumbnails list */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
-            {filteredProjects.map((p, idx) => {
-              const isCurrent = p.title === activeProject.title;
-              return (
-                <button
-                  key={p.title}
-                  type="button"
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`p-2.5 rounded-2xl text-left transition-all duration-200 flex flex-col justify-between border ${
-                    isCurrent
-                      ? 'bg-white dark:bg-slate-900 border-orange-500 shadow-md shadow-orange-500/10 ring-2 ring-orange-500/20'
-                      : 'bg-white/60 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-orange-400/60'
-                  }`}
-                >
-                  <div className="flex items-center justify-between w-full mb-1">
-                    <span
-                      className={`text-[10px] font-bold ${
-                        isCurrent ? 'text-orange-500' : 'text-slate-400'
-                      }`}
-                    >
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    {p.badge && (
-                      <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold truncate max-w-[80px]">
-                        {p.badge}
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-xs font-bold text-slate-900 dark:text-white truncate w-full">
-                    {p.title}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
+        )}
       </div>
 
-      {/* 5. Interactive Full Case Study Modal */}
+      {/* 3. High-Detail Interactive Case Study Modal */}
       <AnimatePresence>
         {selectedModalProject && (
           <motion.div
@@ -680,7 +482,7 @@ export default function Projects() {
               </button>
 
               {/* Banner Image */}
-              <div className="relative h-64 sm:h-72 w-full bg-slate-950 overflow-hidden">
+              <div className="relative h-60 sm:h-72 w-full bg-slate-950 overflow-hidden">
                 {selectedModalProject.image ? (
                   <Image
                     src={selectedModalProject.image}
@@ -698,7 +500,7 @@ export default function Projects() {
                 <div className="absolute bottom-5 left-6 right-6">
                   {selectedModalProject.badge && (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white mb-2 shadow-lg">
-                      <FaFire className="w-2.5 h-2.5" />
+                      <FaStar className="w-2.5 h-2.5" />
                       {selectedModalProject.badge}
                     </span>
                   )}
@@ -773,7 +575,7 @@ export default function Projects() {
                       href={selectedModalProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-xs sm:text-sm font-bold shadow-md transition-all hover:scale-105"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-xs sm:text-sm font-bold shadow-md transition-all hover:scale-105 active:scale-95"
                     >
                       <FaExternalLinkAlt className="w-3 h-3" />
                       <span>Visit Live Site</span>
@@ -785,7 +587,7 @@ export default function Projects() {
                       href={selectedModalProject.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-bold border border-slate-300 dark:border-slate-700 transition-all hover:scale-105"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-bold border border-slate-300 dark:border-slate-700 transition-all hover:scale-105 active:scale-95"
                     >
                       <FaGithub className="w-3.5 h-3.5" />
                       <span>Source Code</span>

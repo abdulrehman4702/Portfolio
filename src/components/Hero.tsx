@@ -183,12 +183,12 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* 2. TECH HIGHLIGHTS PILL ROW */}
+        {/* 2. TECH HIGHLIGHTS PILL ROW (Aesthetic floating tech badges) */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 z-20 shrink-0"
+          className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 z-20 shrink-0 select-none"
         >
           {techBadges.map((badge, idx) => {
             const Icon = badge.icon;
@@ -198,7 +198,7 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.06 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm backdrop-blur-md hover:border-orange-500/60 hover:shadow transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1 sm:py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md"
               >
                 <Icon className={`w-3 h-3 ${badge.color}`} />
                 <span>{badge.label}</span>
@@ -207,64 +207,58 @@ export default function Hero() {
           })}
         </motion.div>
 
-        {/* 3. BOTTOM ROW: Social Badges (Left) | Bold Headline (Right) */}
+        {/* 3. BOTTOM ROW: Interactive Action Buttons (Left) | Bold Headline (Right) */}
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-3 sm:gap-4 z-20 shrink-0 text-center md:text-left">
           
-          {/* Bottom Left: Social Badges & Actions */}
+          {/* Bottom Left: Distinct Interactive Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-2.5"
           >
-            {/* LinkedIn Badge */}
+            {/* LinkedIn Button */}
             <a
               href="https://www.linkedin.com/in/abdul-rehman-solution-engineer/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-[#0A66C2] dark:hover:border-[#0A66C2] shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200"
+              className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0A66C2]/10 hover:bg-[#0A66C2] border border-[#0A66C2]/30 hover:border-[#0A66C2] text-[#0A66C2] hover:text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs font-bold active:scale-95"
               aria-label="LinkedIn Profile"
             >
-              <span className="flex h-4.5 w-4.5 items-center justify-center rounded bg-[#0A66C2] text-white text-[10px]">
-                <FaLinkedinIn />
-              </span>
+              <FaLinkedinIn className="w-3.5 h-3.5" />
               <span>LinkedIn</span>
             </a>
 
-            {/* GitHub Badge */}
+            {/* GitHub Button */}
             <a
               href="https://github.com/abdulrehman4702"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-900 dark:hover:border-white shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200"
+              className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 dark:bg-white/10 hover:bg-black dark:hover:bg-white/20 border border-slate-800 dark:border-white/20 text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs font-bold active:scale-95"
               aria-label="GitHub Profile"
             >
-              <span className="flex h-4.5 w-4.5 items-center justify-center rounded bg-slate-900 dark:bg-slate-800 text-white text-[10px]">
-                <FaGithub />
-              </span>
+              <FaGithub className="w-3.5 h-3.5" />
               <span>GitHub</span>
             </a>
 
-            {/* Email Contact Pill */}
+            {/* Email Contact Button */}
             <a
               href="mailto:abdulrehman2001y@gmail.com"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-500 shadow-sm hover:shadow transition-all text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200"
+              className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-orange-500/10 hover:bg-orange-500 border border-orange-500/30 hover:border-orange-500 text-orange-600 dark:text-orange-400 hover:text-white dark:hover:text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs font-bold active:scale-95"
               aria-label="Email Abdur Rehman"
             >
-              <span className="flex h-4.5 w-4.5 items-center justify-center rounded bg-orange-500 text-white text-[9px]">
-                <FaEnvelope />
-              </span>
-              <span>Get in Touch</span>
+              <FaEnvelope className="w-3.5 h-3.5" />
+              <span>Contact</span>
             </a>
 
-            {/* CV Download Pill */}
+            {/* Resume Download Button */}
             <a
               href="/Rehman_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-all text-[11px] sm:text-xs font-bold text-orange-700 dark:text-orange-300 shadow-sm"
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 active:scale-95"
             >
-              <FaFileDownload className="w-3 h-3 text-orange-500" />
+              <FaFileDownload className="w-3.5 h-3.5" />
               <span>Resume</span>
             </a>
           </motion.div>
