@@ -1,6 +1,6 @@
-import Contact from '@/components/Contact';
+'use client';
 
-export const dynamic = 'force-static';
+import Contact from '@/components/Contact';
 
 export default function ContactPage() {
   return (

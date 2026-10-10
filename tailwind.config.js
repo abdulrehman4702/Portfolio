@@ -15,9 +15,9 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         brand: {
-          rose: '#f43f5e',
-          pink: '#ec4899',
-          blush: '#fb7185',
+          orange: '#f97316',
+          amber: '#f59e0b',
+          teal: '#0d9488',
           slate: '#0f172a',
         },
         primary: {
@@ -49,6 +49,20 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        pulseSlow: {
+          '0%, 100%': { opacity: 0.4 },
+          '50%': { opacity: 0.8 },
+        },
+      },
+      animation: {
+        marquee: 'marquee 30s linear infinite',
+        pulseSlow: 'pulseSlow 4s ease-in-out infinite',
+      },
       borderRadius: {
         '3xl': '1.5rem',
         '4xl': '2rem',
@@ -58,5 +72,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }
