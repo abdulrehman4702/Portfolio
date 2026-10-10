@@ -1,128 +1,185 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GraduationCap, Award } from 'lucide-react';
+import Image from 'next/image';
+import { GraduationCap, Award, MapPin } from 'lucide-react';
 
 interface EducationEntry {
   degree: string;
   institution: string;
   period: string;
-  logoUrl: string;
-  logoAlt: string;
-  subtitle?: string;
-  coursework?: string[];
+  detail: string;
+  badge?: string;
+  focus?: string[];
+  logo?: string;
+  logoAlt?: string;
 }
 
 const educationList: EducationEntry[] = [
   {
-    degree: 'Bachelor of Science in Software Engineering',
-    institution: 'Sir Syed CASE Institute of Technology',
-    period: '2020 – 2024',
-    logoUrl: 'https://www.hec.gov.pk/english/universities/PublishingImages/Sir%20Syed%20Case%20Institute.jpg',
-    logoAlt: 'Sir Syed CASE Institute of Technology',
-    subtitle: 'HEC-Recognized University · Top Academic Track',
-    coursework: [
-      'Software Engineering & Design',
-      'Artificial Intelligence & Deep Learning',
-      'Computer Vision & Pattern Recognition',
-      'Advanced Database Management',
-      'Distributed Systems & Networks',
-      'Agile Project Management',
-    ],
+    degree: 'Bachelor of Computer Science',
+    institution: 'University of Engineering and Technology, Lahore',
+    period: 'Pursuing',
+    detail:
+      'Focused interest in programming, web development, gaming & animation. Building strong technical and analytical skills with a commitment to continuous learning.',
+    badge: 'Gaming & Animation',
+    focus: ['Programming', 'Web Development', 'Gaming & Animation', 'DSA'],
+    logo: '/images/education/uet.webp',
+    logoAlt: 'University of Engineering and Technology, Lahore logo',
   },
   {
-    degree: 'ICS (Intermediate in Computer Science)',
-    institution: 'Punjab Group of Colleges, Mianwali',
-    period: '2018 – 2020',
-    logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3K5RYwa4DOEhcMExswKoZoMIo6aEiHsQ-RA&s',
-    logoAlt: 'Punjab Group of Colleges',
-    subtitle: 'Intermediate Level · Mathematics & Computer Science',
+    degree: 'Intermediate — ICS',
+    institution: 'Lahore College for Women University',
+    period: 'Completed',
+    detail: 'Intermediate in Computer Science with a strong academic foundation.',
+    badge: 'Grade: A+',
+    focus: ['Computer Science', 'Mathematics', 'Analytical Skills'],
+    logo: '/images/education/lcwu.webp',
+    logoAlt: 'Lahore College for Women University logo',
   },
 ];
 
-function EducationCard({ entry, index }: { entry: EducationEntry; index: number }) {
-  return (
-    <motion.article
-      className="rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm hover:shadow-lg hover:border-orange-400/60 transition-all duration-300"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      viewport={{ once: true }}
-    >
-      <div className="flex flex-col sm:flex-row items-stretch">
-        {/* Logo & period */}
-        <div className="sm:w-56 flex-shrink-0 bg-slate-50 dark:bg-slate-800/50 p-4 sm:p-6 flex flex-col items-center justify-center text-center border-b sm:border-b-0 sm:border-r border-slate-200/80 dark:border-slate-800">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center p-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={entry.logoUrl}
-              alt={entry.logoAlt}
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <span className="mt-3 sm:mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-            <GraduationCap className="w-3.5 h-3.5 text-teal-600" />
-            {entry.period}
-          </span>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 p-5 sm:p-7 md:p-8 flex flex-col justify-center">
-          <h3 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-            {entry.degree}
-          </h3>
-          <p className="mt-1 text-xs sm:text-sm font-semibold text-orange-600 dark:text-orange-400">
-            {entry.institution}
-          </p>
-          {entry.subtitle && (
-            <p className="mt-0.5 text-[11px] sm:text-xs text-slate-500">
-              {entry.subtitle}
-            </p>
-          )}
-
-          {entry.coursework && entry.coursework.length > 0 && (
-            <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-800">
-              <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5 mb-2.5">
-                <Award className="w-3.5 h-3.5 text-orange-500" />
-                Key Coursework &amp; Competencies
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
-                {entry.coursework.map((item) => (
-                  <div key={item} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </motion.article>
-  );
-}
+const topSkills = [
+  'Web Development',
+  'Game Development',
+  'C++ Programming',
+  'MERN Stack',
+  'C#',
+  'SQL',
+  'Graphic Design',
+  'Project Management',
+  'Creativity & Innovation',
+  'DSA & Problem Solving',
+];
 
 export default function Education() {
   return (
-    <section id="education" className="section bg-white dark:bg-slate-900/40 text-foreground w-full py-16 sm:py-20 border-t border-slate-200/70 dark:border-slate-800/70">
-      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-          <span className="inline-flex items-center rounded-full bg-teal-50 dark:bg-teal-950/50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 ring-1 ring-teal-200/80 dark:ring-teal-800 mb-3">
-            Academic Background
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Education &amp; Qualifications
-          </h2>
-          <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300">
-            Formal degrees and software engineering specialization.
-          </p>
-        </div>
+    <section
+      id="education"
+      className="relative overflow-x-clip w-full py-20 sm:py-24 lg:py-28 border-t border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-950"
+    >
+      <div
+        className="pointer-events-none absolute -right-24 top-24 w-72 h-72 rounded-full bg-slate-200/70 dark:bg-pink-500/10 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -left-24 bottom-24 w-72 h-72 rounded-full bg-slate-100 dark:bg-rose-500/10 blur-3xl"
+        aria-hidden
+      />
 
-        <div className="space-y-5 sm:space-y-6">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 max-w-5xl">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-2xl mx-auto mb-12 sm:mb-14"
+        >
+          <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-rose-700 dark:text-rose-400 mb-4">
+            <span className="h-px w-6 bg-rose-500/50 dark:bg-rose-400/70" aria-hidden />
+            Education
+            <span className="h-px w-6 bg-rose-500/50 dark:bg-rose-400/70" aria-hidden />
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+            Academic background
+          </h2>
+          <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+            Building a strong foundation in computer science while growing as a full-stack developer.
+          </p>
+        </motion.div>
+
+        <div className="space-y-5 sm:space-y-6 mb-12">
           {educationList.map((entry, index) => (
-            <EducationCard key={entry.institution} entry={entry} index={index} />
+            <motion.article
+              key={entry.institution}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              className="rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/70 overflow-hidden shadow-sm shadow-slate-900/[0.04] hover:border-rose-300 dark:hover:border-rose-500/40 transition-all duration-300"
+            >
+              <div className="flex flex-col sm:flex-row">
+                <div className="sm:w-48 flex-shrink-0 bg-white dark:bg-slate-900 p-5 sm:p-6 flex flex-col items-center justify-center text-center border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800">
+                  {entry.logo ? (
+                    <div className="relative h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem] rounded-2xl overflow-hidden bg-black border border-slate-200 dark:border-slate-700 shadow-sm">
+                      <Image
+                        src={entry.logo}
+                        alt={entry.logoAlt || entry.institution}
+                        fill
+                        unoptimized
+                        sizes="72px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-600 dark:bg-gradient-to-br dark:from-rose-500 dark:to-pink-500 text-white shadow-md shadow-rose-600/20">
+                      <GraduationCap className="h-7 w-7" strokeWidth={2} />
+                    </span>
+                  )}
+                  <span className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    {entry.period}
+                  </span>
+                  {entry.badge && (
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 dark:text-rose-400">
+                      <Award className="h-3 w-3" />
+                      {entry.badge}
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex-1 p-5 sm:p-7 md:p-8">
+                  <h3 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                    {entry.degree}
+                  </h3>
+                  <p className="mt-1 text-sm font-semibold text-rose-700 dark:text-rose-400">
+                    {entry.institution}
+                  </p>
+                  <p className="mt-1 flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                    <MapPin className="h-3 w-3" />
+                    Lahore, Punjab, Pakistan
+                  </p>
+                  <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {entry.detail}
+                  </p>
+                  {entry.focus && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {entry.focus.map((item) => (
+                        <span
+                          key={item}
+                          className="inline-flex items-center rounded-lg bg-white dark:bg-slate-800 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-700"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="rounded-[1.75rem] border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 p-6 sm:p-8"
+        >
+          <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-slate-900 dark:text-white mb-4">
+            Top skills
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {topSkills.map((skill) => (
+              <span
+                key={skill}
+                className="inline-flex items-center rounded-full bg-white dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold text-slate-700 dark:text-slate-200 hover:border-rose-300 dark:hover:border-rose-500/40 transition-colors"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

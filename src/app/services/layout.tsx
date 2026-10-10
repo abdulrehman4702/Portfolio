@@ -4,16 +4,16 @@ import { siteUrl } from '@/lib/seo';
 export const metadata: Metadata = {
   title: 'Services',
   description:
-    'Full Stack Web Development (MERN), AI/ML integration, automation platforms, and HR & business systems. React, Next.js, Node.js, MongoDB, GCP. Hire Abdur Rehman for web apps, recruitment tools, and e-commerce.',
+    'MERN full-stack development, frontend, graphic design, C++, C#, and game prototypes by Hamayal Ansari — UET Lahore.',
   openGraph: {
-    title: 'Services | Abdur Rehman - Full Stack Developer (MERN)',
+    title: 'Services | Hamayal Ansari',
     description:
-      'Full Stack Web Development, AI/ML integration, automation, HR systems. Mansha Transport, Airec, Talent Sync IQ, Unsh.',
+      'MERN apps, UI development, graphic design, and programming projects.',
     url: `${siteUrl}/services`,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Services | Abdur Rehman',
+    title: 'Services | Hamayal Ansari',
   },
   alternates: { canonical: `${siteUrl}/services` },
 };

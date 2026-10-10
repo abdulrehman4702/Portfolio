@@ -1,12 +1,30 @@
 {
-  "name": "Abdur Rehman - Full Stack Developer (MERN)",
-  "short_name": "Abdur Rehman",
-  "description": "Portfolio of Abdur Rehman. Full Stack Developer (MERN), React, Next.js, Node.js, AI/ML, GCP. Projects: Mansha Transport, Airec, Talent Sync IQ, Unsh.",
+  "name": "Hamayal Ansari — Full-Stack Web Developer",
+  "short_name": "Hamayal Ansari",
+  "description": "BS CS student at UET Lahore. MERN, C++, C#, SQL, graphic design, gaming & animation.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#059669",
+  "background_color": "#f8fafc",
+  "theme_color": "#e11d48",
   "orientation": "portrait-primary",
-  "categories": ["portfolio", "technology", "developer"],
-  "lang": "en"
+  "categories": ["portfolio", "technology", "developer", "design"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }

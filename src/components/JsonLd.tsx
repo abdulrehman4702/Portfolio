@@ -46,7 +46,8 @@ export function JsonLd() {
     '@type': 'WebSite',
     name: siteName,
     url: siteUrl,
-    description: 'Portfolio of Abdur Rehman - Full Stack Developer (MERN), React, Next.js, Node.js, AI/ML, GCP.',
+    description:
+      'Portfolio of Hamayal Ansari — Full-Stack Web Developer (MERN), BS CS student at UET Lahore. C++, C#, SQL, graphic design, gaming & animation.',
     author: personSchema,
     publisher: organizationSchema,
   };

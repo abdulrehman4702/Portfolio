@@ -4,48 +4,49 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%; /* slate-900 */
+    /* Clean light neutrals — rose only as accent */
+    --background: 210 20% 98%; /* soft cool off-white */
+    --foreground: 222.2 47.4% 11.2%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 47.4% 11.2%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
-    --primary: 24.6 95% 53.1%; /* Orange #f97316 */
+    --primary: 346.8 77.2% 49.8%; /* deeper rose #e11d48 for light contrast */
     --primary-foreground: 0 0% 100%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 173.4 80.4% 40%; /* Teal #0d9488 */
+    --muted-foreground: 215.4 16.3% 42%;
+    --accent: 346.8 77.2% 49.8%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 24.6 95% 53.1%;
+    --border: 214 25% 90%;
+    --input: 214 25% 90%;
+    --ring: 346.8 77.2% 49.8%;
     --radius: 1rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%; /* slate-950 */
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 47% 11%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 47% 11%;
     --popover-foreground: 210 40% 98%;
-    --primary: 24.6 95% 53.1%; /* Orange #f97316 */
+    --primary: 349.7 89.2% 60.2%; /* brighter rose for dark */
     --primary-foreground: 0 0% 100%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 173.4 80.4% 40%;
+    --accent: 330.4 81.2% 60%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 24.6 95% 53.1%;
+    --ring: 349.7 89.2% 60.2%;
   }
 }
 
@@ -58,13 +59,22 @@
     overflow-x: hidden;
   }
   body {
-    @apply bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-orange-500/20 selection:text-orange-700 dark:selection:text-orange-300;
+    @apply bg-[hsl(var(--background))] text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-rose-200/70 selection:text-rose-900 dark:selection:bg-rose-500/25 dark:selection:text-rose-200;
     overflow-x: hidden;
-    background-image: 
-      radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.04) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.04) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.03) 0px, transparent 50%);
+    /* Light: subtle cool slate atmosphere — no pink wash */
+    background-image:
+      radial-gradient(at 0% 0%, rgba(148, 163, 184, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(226, 232, 240, 0.8) 0px, transparent 45%),
+      radial-gradient(at 50% 100%, rgba(241, 245, 249, 0.9) 0px, transparent 50%);
     background-attachment: fixed;
+  }
+
+  .dark body,
+  html.dark body {
+    background-image:
+      radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.06) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(251, 113, 133, 0.04) 0px, transparent 50%);
   }
 }
 
@@ -76,14 +86,6 @@
   @apply max-w-7xl mx-auto;
 }
 
-.landing-card {
-  @apply rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-white/90 dark:bg-slate-900/80 shadow-md shadow-slate-900/5 backdrop-blur-xl transition-all duration-300;
-}
-
-.landing-card-hover {
-  @apply rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-white/90 dark:bg-slate-900/80 shadow-md shadow-slate-900/5 hover:border-orange-400/60 dark:hover:border-orange-500/60 hover:shadow-xl hover:shadow-orange-500/5 backdrop-blur-xl transition-all duration-300;
-}
-
 /* Custom modern scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -92,9 +94,16 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(249, 115, 22, 0.25);
+  background: rgba(100, 116, 139, 0.35);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(249, 115, 22, 0.45);
+  background: rgba(225, 29, 72, 0.45);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(244, 63, 94, 0.28);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(244, 63, 94, 0.45);
 }

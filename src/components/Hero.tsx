@@ -1,83 +1,62 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import {
   FaArrowRight,
-  FaFileDownload,
+  FaWhatsapp,
   FaEnvelope,
   FaLinkedinIn,
   FaGithub,
   FaExpand,
   FaTimes,
   FaCode,
-  FaServer,
-  FaBrain,
-  FaCloud,
+  FaPalette,
+  FaGamepad,
+  FaLaptopCode,
 } from 'react-icons/fa';
+
+const techBadges = [
+  { label: 'MERN Stack', icon: FaLaptopCode, color: 'text-rose-500' },
+  { label: 'C++ · C# · SQL', icon: FaCode, color: 'text-pink-500' },
+  { label: 'Graphic Design', icon: FaPalette, color: 'text-rose-400' },
+  { label: 'Gaming & Animation', icon: FaGamepad, color: 'text-pink-400' },
+];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const },
+};
 
 export default function Hero() {
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Scroll Parallax & Animation Hooks
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 20,
-    restDelta: 0.001,
-  });
-
-  const yText = useTransform(smoothProgress, [0, 1], [0, 85]);
-  const yImage = useTransform(smoothProgress, [0, 1], [0, 35]);
-  const scaleImage = useTransform(smoothProgress, [0, 0.5, 1], [1, 1.03, 0.96]);
-  const glowY = useTransform(smoothProgress, [0, 1], [0, 140]);
-
-  const techBadges = [
-    { label: 'Next.js 14 & React', icon: FaCode, color: 'text-orange-500' },
-    { label: 'Node.js & Express APIs', icon: FaServer, color: 'text-emerald-500' },
-    { label: 'AI Agents & LLM Workflows', icon: FaBrain, color: 'text-purple-500' },
-    { label: 'GCP Cloud & Microservices', icon: FaCloud, color: 'text-teal-500' },
-  ];
 
   return (
     <section
-      ref={sectionRef}
       id="hero"
       className="relative w-full overflow-x-clip pt-16 sm:pt-18 lg:pt-20 pb-3 sm:pb-4 lg:pb-5 min-h-[100dvh] lg:h-screen lg:max-h-[1080px] flex flex-col justify-between"
     >
-      {/* Dynamic Background Ambient Glows reacting to scroll */}
-      <motion.div
-        style={{ y: glowY }}
-        className="pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 w-full max-w-[1500px] h-[50vh] max-h-[500px] bg-gradient-to-b from-orange-500/15 via-teal-500/10 to-transparent blur-[140px] -z-10"
+      <div
+        className="pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 w-full max-w-[1500px] h-[50vh] max-h-[500px] bg-gradient-to-b from-slate-300/40 via-rose-200/20 to-transparent dark:from-rose-500/15 dark:via-pink-500/10 dark:to-transparent blur-[80px] -z-10"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -left-20 top-24 w-80 h-80 rounded-full bg-orange-500/10 blur-[120px] -z-10"
+        className="pointer-events-none absolute -left-20 top-24 w-72 h-72 rounded-full bg-slate-200/50 dark:bg-rose-500/10 blur-[80px] -z-10"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -right-20 top-40 w-80 h-80 rounded-full bg-teal-500/10 blur-[120px] -z-10"
+        className="pointer-events-none absolute -right-20 top-40 w-72 h-72 rounded-full bg-rose-100/40 dark:bg-pink-500/10 blur-[80px] -z-10"
         aria-hidden="true"
       />
 
-      {/* FULL-WIDTH VIEWPORT-FIT CONTAINER (No artificial max-w-7xl restriction) */}
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-20 relative z-10 flex-1 flex flex-col justify-between gap-2.5 sm:gap-3.5 lg:gap-4 min-h-0">
-        
-        {/* 1. CENTER STAGE: FULL-WIDTH 100% SPAN "DEVELOPER" TEXT + PARALLAX CUTOUT IMAGE */}
         <div className="relative flex-1 flex items-center justify-center min-h-[200px] sm:min-h-[260px] lg:min-h-[300px] max-h-[46vh] my-auto">
-          
-          {/* Full Screen Width Edge-to-Edge "DEVELOPER" Typography (Zero Clipping Guaranteed) */}
           <motion.div
-            style={{ y: yText }}
-            initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 w-full h-full flex items-center justify-center select-none pointer-events-none z-0 px-2 sm:px-4"
             aria-hidden="true"
           >
@@ -93,62 +72,57 @@ export default function Hero() {
                 dominantBaseline="middle"
                 textLength="970"
                 lengthAdjust="spacingAndGlyphs"
-                className="font-black fill-slate-200/90 dark:fill-slate-800/85 transition-colors duration-300 uppercase tracking-wide"
+                className="font-black uppercase tracking-wide transition-colors duration-300 fill-slate-300 dark:fill-slate-800"
                 style={{
                   fontWeight: 900,
                   fontSize: '120px',
                 }}
               >
-                DEVELOPER
+                HAMAYAL
               </text>
             </svg>
           </motion.div>
 
-          {/* Floating Live Tech Badges (Left & Right) on wide screens */}
           <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:flex justify-between w-full max-w-7xl mx-auto px-4 z-20">
-            {/* Left Floating Card */}
             <motion.div
               initial={{ opacity: 0, x: -35, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
               className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-900/5 max-w-[190px]"
             >
               <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white">
-                <span className="p-1.5 rounded-lg bg-orange-500/10 text-orange-500">
-                  <FaCode className="w-3 h-3" />
+                <span className="p-1.5 rounded-lg bg-rose-500/10 text-rose-500">
+                  <FaLaptopCode className="w-3 h-3" />
                 </span>
-                <span>Full-Stack Core</span>
+                <span>MERN Stack</span>
               </div>
               <p className="text-[10.5px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
-                React, Next.js 14 App Router, TypeScript, Node.js &amp; MongoDB.
+                Full-stack apps with MongoDB, Express, React &amp; Node.js.
               </p>
             </motion.div>
 
-            {/* Right Floating Card */}
             <motion.div
               initial={{ opacity: 0, x: 35, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
               className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-slate-900/5 max-w-[190px] text-right"
             >
               <div className="flex items-center justify-end gap-2 text-xs font-bold text-slate-900 dark:text-white">
-                <span>AI &amp; Cloud Infra</span>
-                <span className="p-1.5 rounded-lg bg-teal-500/10 text-teal-500">
-                  <FaCloud className="w-3 h-3" />
+                <span>Code + Games</span>
+                <span className="p-1.5 rounded-lg bg-pink-500/10 text-pink-500">
+                  <FaGamepad className="w-3 h-3" />
                 </span>
               </div>
               <p className="text-[10.5px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
-                GCP Deployments, AI Agent Pipelines &amp; Docker CI/CD.
+                C++, C#, and interactive game prototypes under the hood.
               </p>
             </motion.div>
           </div>
 
-          {/* Center Cutout Portrait (Layered with viewport-fitting height) */}
           <motion.div
-            style={{ y: yImage, scale: scaleImage }}
-            initial={{ opacity: 0, y: 30, scale: 0.94, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 0.85, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 h-full flex flex-col items-center justify-end"
           >
             <div
@@ -156,26 +130,28 @@ export default function Hero() {
               onClick={() => setIsPhotoModalOpen(true)}
               title="Click to expand photo"
             >
-              {/* Soft atmospheric backlight halo */}
-              <div className="pointer-events-none absolute -inset-6 rounded-full bg-gradient-to-b from-orange-500/25 via-teal-500/15 to-transparent blur-2xl group-hover:scale-110 transition-transform duration-500 -z-10" />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-6 rounded-full bg-gradient-to-b from-rose-300/35 via-pink-200/20 to-transparent dark:from-rose-500/25 dark:via-pink-500/15 dark:to-transparent blur-2xl group-hover:scale-110 transition-transform duration-500 -z-10"
+              />
 
-              {/* Transparent Cutout Image */}
-              <div className="relative h-[210px] xs:h-[250px] sm:h-[300px] md:h-[350px] lg:h-[min(44vh,400px)] xl:h-[min(46vh,430px)] w-auto aspect-[3/4] flex items-end justify-center">
+              <div className="relative h-[220px] xs:h-[260px] sm:h-[310px] md:h-[360px] lg:h-[min(44vh,400px)] xl:h-[min(46vh,430px)] w-auto aspect-[3/4] flex items-end justify-center transition-transform duration-300 group-hover:scale-[1.03] group-hover:-translate-y-1">
                 <Image
-                  src="/images/profile-transparent.png"
-                  alt="Abdur Rehman - Full Stack Developer & AI Solutions Engineer"
-                  width={600}
-                  height={800}
+                  src="/images/profile-transparent.webp"
+                  alt="Hamayal Ansari - Full-Stack Web Developer & BS CS Student"
+                  width={360}
+                  height={480}
                   priority
-                  className="w-full h-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.03]"
+                  unoptimized
+                  sizes="(max-width: 768px) 45vw, 360px"
+                  className="relative z-[1] w-full h-full object-cover object-top rounded-2xl"
                   style={{
                     filter:
-                      'drop-shadow(0 15px 25px rgba(0, 0, 0, 0.45)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+                      'drop-shadow(0 18px 28px rgba(0, 0, 0, 0.35)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18))',
                   }}
                 />
 
-                {/* Hover Expand Badge */}
-                <div className="absolute top-4 right-2 p-2 rounded-full bg-slate-900/80 dark:bg-black/80 backdrop-blur-md border border-white/20 text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                <div className="absolute top-3 right-3 z-[2] p-2 rounded-full bg-slate-900/80 dark:bg-black/80 backdrop-blur-md border border-white/20 text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
                   <FaExpand className="w-3 h-3" />
                 </div>
               </div>
@@ -183,43 +159,33 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* 2. TECH HIGHLIGHTS PILL ROW (Aesthetic floating tech badges) */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.08 }}
           className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 z-20 shrink-0 select-none"
         >
-          {techBadges.map((badge, idx) => {
+          {techBadges.map((badge) => {
             const Icon = badge.icon;
             return (
-              <motion.span
+              <span
                 key={badge.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.3 + idx * 0.06 }}
                 className="inline-flex items-center gap-1.5 px-3 py-1 sm:py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md"
               >
                 <Icon className={`w-3 h-3 ${badge.color}`} />
                 <span>{badge.label}</span>
-              </motion.span>
+              </span>
             );
           })}
         </motion.div>
 
-        {/* 3. BOTTOM ROW: Interactive Action Buttons (Left) | Bold Headline (Right) */}
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-3 sm:gap-4 z-20 shrink-0 text-center md:text-left">
-          
-          {/* Bottom Left: Distinct Interactive Action Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
             className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-2.5"
           >
-            {/* LinkedIn Button */}
             <a
-              href="https://www.linkedin.com/in/abdul-rehman-solution-engineer/"
+              href="https://www.linkedin.com/in/hamayal-ansari-a12b10371/"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0A66C2]/10 hover:bg-[#0A66C2] border border-[#0A66C2]/30 hover:border-[#0A66C2] text-[#0A66C2] hover:text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs font-bold active:scale-95"
@@ -229,9 +195,8 @@ export default function Hero() {
               <span>LinkedIn</span>
             </a>
 
-            {/* GitHub Button */}
             <a
-              href="https://github.com/abdulrehman4702"
+              href="https://github.com/hamayalansari"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 dark:bg-white/10 hover:bg-black dark:hover:bg-white/20 border border-slate-800 dark:border-white/20 text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs font-bold active:scale-95"
@@ -241,87 +206,82 @@ export default function Hero() {
               <span>GitHub</span>
             </a>
 
-            {/* Email Contact Button */}
             <a
-              href="mailto:abdulrehman2001y@gmail.com"
-              className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-orange-500/10 hover:bg-orange-500 border border-orange-500/30 hover:border-orange-500 text-orange-600 dark:text-orange-400 hover:text-white dark:hover:text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs font-bold active:scale-95"
-              aria-label="Email Abdur Rehman"
+              href="mailto:hamayalansari10@gmail.com"
+              className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-600 border border-rose-200 hover:border-rose-600 text-rose-700 dark:bg-rose-500/10 dark:border-rose-500/30 dark:text-rose-400 dark:hover:bg-rose-500 dark:hover:border-rose-500 hover:text-white dark:hover:text-white shadow-sm hover:shadow-md transition-all duration-200 text-xs font-bold active:scale-95"
+              aria-label="Email Hamayal Ansari"
             >
               <FaEnvelope className="w-3.5 h-3.5" />
               <span>Contact</span>
             </a>
 
-            {/* Resume Download Button */}
             <a
-              href="/Rehman_resume.pdf"
+              href="https://wa.me/923284024706"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-200 active:scale-95"
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 dark:bg-gradient-to-r dark:from-rose-500 dark:to-pink-500 dark:hover:from-rose-600 dark:hover:to-pink-600 text-white font-bold text-xs shadow-md shadow-rose-600/25 hover:shadow-lg hover:shadow-rose-600/30 transition-all duration-200 active:scale-95"
             >
-              <FaFileDownload className="w-3.5 h-3.5" />
-              <span>Resume</span>
+              <FaWhatsapp className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
             </a>
           </motion.div>
 
-          {/* Bottom Right: Big Bold Role Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.12 }}
             className="text-center md:text-right"
           >
+            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-rose-700 dark:text-rose-400 mb-1">
+              BS CS Student · UET Lahore · Open to work
+            </p>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight text-slate-900 dark:text-white leading-none">
-              FULL-STACK ARCHITECT
+              Full-Stack Web
             </h2>
-            <p className="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.16em] text-orange-600 dark:text-orange-400 mt-1">
-              &amp; AI Solutions Engineer
+            <p className="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-pink-400 mt-1">
+              Developer &amp; Designer
             </p>
           </motion.div>
         </div>
 
-        {/* 4. BOTTOM BIO QUOTE & STATS */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.14 }}
           className="pt-2.5 sm:pt-3 border-t border-slate-200/80 dark:border-slate-800/80 text-center md:text-left z-20 flex flex-col lg:flex-row items-center justify-between gap-2.5 sm:gap-3 lg:gap-6 shrink-0"
         >
           <div className="max-w-5xl space-y-1">
             <p className="text-[11px] sm:text-xs md:text-[13px] lg:text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-normal">
-              &ldquo;Specializing in high-performance Full-Stack development across the{' '}
+              Passionate about{' '}
               <strong className="font-semibold text-slate-900 dark:text-white">
-                MERN Stack, Next.js 14, and GCP Cloud Architecture
+                C++, web development, gaming &amp; animation
               </strong>
-              . I architect scalable microservices, resilient REST &amp; WebSocket APIs, and intelligent AI
-              workflows designed for concurrency and security.&rdquo;
+              — combining technical skills with creativity to build interactive projects. Continuously
+              improving in problem solving, DSA, and software development from Lahore, Pakistan.
             </p>
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium">
               <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
-                ⚡ 15+ Production Deliverables
+                MERN · C++ · C# · SQL
               </span>
               <span>•</span>
               <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
-                🔒 Multi-Tenant &amp; Role-Based Security
+                Graphic Design
               </span>
               <span>•</span>
               <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
-                🌐 International Client Platforms
+                Lahore, Pakistan
               </span>
             </div>
           </div>
 
           <a
             href="#projects"
-            className="shrink-0 inline-flex items-center gap-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-bold text-white shadow-md shadow-slate-900/15 dark:shadow-orange-500/20 transition-all hover:scale-[1.02]"
+            className="shrink-0 inline-flex items-center gap-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 dark:bg-rose-500 dark:hover:bg-rose-600 px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-bold text-white shadow-md shadow-rose-600/25 dark:shadow-rose-500/20 transition-all hover:scale-[1.02]"
           >
-            <span>Explore Projects</span>
+            <span>View Work</span>
             <FaArrowRight className="h-3 w-3" />
           </a>
         </motion.div>
-
       </div>
 
-      {/* Lightbox / High-Res Photo Modal */}
       <AnimatePresence>
         {isPhotoModalOpen && (
           <motion.div
@@ -347,31 +307,31 @@ export default function Hero() {
                 <FaTimes className="w-4 h-4" />
               </button>
 
-              <div className="relative w-64 h-80 mx-auto rounded-2xl overflow-hidden flex items-center justify-center mt-2">
+              <div className="relative w-52 h-64 sm:w-56 sm:h-72 mx-auto rounded-2xl overflow-hidden mt-2 shadow-lg">
                 <Image
-                  src="/images/profile-transparent.png"
-                  alt="Abdur Rehman"
-                  width={400}
-                  height={500}
-                  className="w-full h-full object-contain"
+                  src="/images/profile-transparent.webp"
+                  alt="Hamayal Ansari"
+                  fill
+                  unoptimized
+                  className="object-cover object-top"
                 />
               </div>
 
               <h3 className="mt-4 text-xl font-bold uppercase tracking-tight text-slate-900 dark:text-white">
-                Abdur Rehman
+                Hamayal Ansari
               </h3>
-              <p className="text-xs text-orange-600 dark:text-orange-400 font-semibold mt-1">
-                Full-Stack Developer &amp; AI Solution Engineer
+              <p className="text-xs text-rose-600 dark:text-rose-400 font-semibold mt-1">
+                Full-Stack Web Developer · BS CS Student
               </p>
 
               <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-3">
                 <a
-                  href="/Rehman_resume.pdf"
+                  href="https://wa.me/923284024706"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold transition-colors"
+                  className="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold transition-colors"
                 >
-                  Download CV
+                  WhatsApp
                 </a>
                 <button
                   type="button"
